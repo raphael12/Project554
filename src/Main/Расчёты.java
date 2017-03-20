@@ -18,26 +18,26 @@ public class Расчёты {
         g2d.setStroke(new BasicStroke(1f));//толщина круга вроде но хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
         g2d.fill(circle(x, y, r, r));//добавляем планету
-        ДвижениеСпутника(x, y, r, g2d, 10);
+        ДвижениеСпутника(x, y, r, g2d, angle);
     }
 
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
         r = r * 3;
         g2d.setColor(Color.RED);
         g2d.draw(circle(x, y, r, r));
-        y += r * Math.sin(angle);
-        x += r * Math.cos(angle);
+        y += r * Math.sin(angle*3);
+        x += r * Math.cos(angle*3);
         r = Math.max(0.1 * r, 5);
         g2d.fill(circle(x, y, r, r));//добавляем круг
     }
-    public  void Sun(double width, double height /*long M масса*/ , Graphics2D g2d){
-        double x = 0.5 * width;//координаты центра
-        double y = 0.5 * height;
+    public  void Sun(int width, int height /*long M масса*/ , Graphics2D g2d){
+        int x = (int) (0.5 * width);//координаты центра
+        int y = (int) (0.5 * height);
         Image im = null;
         try {
-            im = ImageIO.read(new File("sky.png"));
+            im = ImageIO.read(new File("C:\\Users\\user2\\Documents\\GitHub\\Project554\\src\\Main\\sun.png"));
         } catch (IOException e) {}
-        g2d.drawImage(im, (int)x, (int)y, null);
+        g2d.drawImage(im, x-128/2, y-128/2, null);
     }
 
     //    public void ускорение(int X0, int Y0, int x, int y, long G, long Mz, long Mp /* масса планеты*/,int T, double r, float ax, float ay){

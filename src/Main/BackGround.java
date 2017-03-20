@@ -4,7 +4,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-class BgPanel extends JPanel {
+class BackGround extends JPanel {
     public void paintComponent(Graphics g) {
         Image im = null;
         try {

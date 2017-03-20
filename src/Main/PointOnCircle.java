@@ -33,20 +33,17 @@ class PointOnCircle extends JComponent implements ActionListener {
     protected void paintComponent(Graphics g) {
         int width = 750;
         int height = 750;
-
         Image im = null;
         try {
-            im = ImageIO.read(new File("sky.png"));
+            im = ImageIO.read(new File("C:\\Users\\user2\\Documents\\GitHub\\Project554\\src\\Main\\sky3.jpg"));//картинку на фон
         } catch (IOException e) {}
-        g.drawImage(im, 0, 0, null);
-
         g.fillRect(0, 0, width, height);
+        g.drawImage(im, 0, 0, null);
         Graphics2D g2d = (Graphics2D) g;
         Расчёты calc = new Расчёты();
-        calc.движение(width,height,200, angle*2, g2d, Color.black);
-        calc.движение(width,height,150, angle*1.4, g2d, Color.white);
-        calc.Sun(width, height,g2d);
+        calc.движение(width,height,200, angle, g2d, Color.black);
+        calc.движение(width,height,150, angle, g2d, Color.white);
+        calc.Sun((int)width, (int)height,g2d);
     }
-
     public void actionPerformed(ActionEvent e) {}
 }

@@ -9,7 +9,7 @@ public class Main {
                 JFrame frame = new JFrame("Point on circle");
                 final PointOnCircle point = new PointOnCircle();
                 frame.add(point);
-                final JButton button = new JButton("Start");
+                final JButton button = new JButton("Stop");
                 button.setPreferredSize(new Dimension(20,20));
                 button.addActionListener(new ActionListener() {
                     private boolean pulsing = true;
@@ -27,7 +27,7 @@ public class Main {
                 });
                 frame.add(button,BorderLayout.NORTH);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(750, 900);
+                frame.setSize(750, 750);
                 frame.setVisible(true);
             }
         });
