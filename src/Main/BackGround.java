@@ -8,7 +8,7 @@ class BackGround extends JPanel {
     public void paintComponent(Graphics g) {
         Image im = null;
         try {
-            im = ImageIO.read(new File("sky2.GIF"));
+            im = ImageIO.read(new File("res/sky2.GIF"));
         } catch (IOException e) {
         }
         g.drawImage(im, 0, 0, null);

@@ -14,7 +14,10 @@ class PointOnCircle extends JComponent implements ActionListener {
     private double angle;
     private Timer timer;
     private Applet applet = new Applet();
-    File earth = new File("C:\\Users\\dada\\Documents\\GitHub\\Project554\\src\\Main\\earth.png");//сделайте чтоб было без ссылок!!!!!
+    public String curDir = new File("").getAbsolutePath();
+    File earth = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earth.png");//сделайте чтоб было без ссылок!!!!!
+    File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
+    File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
     public PointOnCircle() { //это основной счетсчик
         angle = 0;
         timer = new Timer(10, new ActionListener() {
@@ -35,6 +38,7 @@ class PointOnCircle extends JComponent implements ActionListener {
     }//останавливает таймер
     @Override
     protected void paintComponent(Graphics g) {
+        Расчёты calc = new Расчёты();//создаем переменную класса Расчёты
         int width = 1000;
         int height = 700;
         Image im = null;
@@ -42,14 +46,12 @@ class PointOnCircle extends JComponent implements ActionListener {
             //im = Toolkit.getDefaultToolkit().createImage("sky3.jpg"); это попытки избавиться от ссылки
           //  URL url = new URL(applet.getCodeBase(), "sky3.jpg");
            // im = applet.getImage(applet.getCodeBase(), "sky3.jpg");
-            im = ImageIO.read(new File("C:\\Users\\dada\\Documents\\GitHub\\Project554\\src\\Main\\sky.GIF"));//в im кладем фон
+            im = ImageIO.read(BackGround);//в im кладем фон
         } catch (IOException e) {}
         g.fillRect(0, 0, width, height); //создает квадрат нужной величины(google в помощь)
         g.drawImage(im, 0, 0, null);//кидаем фон
         Graphics2D g2d = (Graphics2D) g;
-        Расчёты calc = new Расчёты();//создаем переменную класса Расчёты
-        calc.движение(width,height,150, angle, g2d, Color.red, earth);//color нужен только для орбиты, нужно от него избатиься
-
+        calc.движение(width,height,250, angle/3, g2d, Color.red, earth);//color нужен только для орбиты, нужно от него избатиься
         calc.Sun(width, height,g2d);//смотреть в расчетах
     }
     public void actionPerformed(ActionEvent e) {}//прост

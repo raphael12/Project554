@@ -18,34 +18,42 @@ public class Расчёты {
             im = ImageIO.read(file);//кладем в im переданную картинку file
         } catch (IOException e) {//здесь можны вывести варнинги если картинка не прочиталась
         }
-        int widthIm = im.getWidth(null);//узнаем размер изображения
-        int heightIm = im.getHeight(null);//узнаем размер изображения
+
+        SizeImages(widthIm, heightIm, im);
         g2d.setColor(color); //цвет орбиты
         g2d.draw(circle(x, y, r, r));//рисует орбиту
         y += r * Math.sin(angle);
         x += r * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
-        g2d.setStroke(new BasicStroke(0.05f));//толщина круга, но как работает хз
+        g2d.setStroke(new BasicStroke(0.2f));//толщина круга, но как работает хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
         g2d.drawImage(im,(int) (x-widthIm/2), (int)(y-heightIm/2), null);
         ДвижениеСпутника(x, y, r, g2d, angle);
+    }
+
+    public void SizeImages(int width, int height, Image im){
+       width = im.getWidth(null);
+       height = im.getHeight(null);
+        System.out.print(width + " ");
     }
 
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
         r = r * 3;
         Image im = null;
         try {
-            im = ImageIO.read(new File("C:\\Users\\dada\\Documents\\GitHub\\Project554\\src\\Main\\moon.png"));
+            im = ImageIO.read(new File("C:\\Users\\user2\\Documents\\GitHub\\Project554\\src\\Main\\res\\moon.png"));
         } catch (IOException e) {
         }
-        int widthIm = im.getWidth(null);//узнаем размер изображения
-        int heightIm = im.getHeight(null);
+        int widthIm = 0;
+        int heightIm = 0;
+        SizeImages(widthIm,heightIm,im);
         g2d.setColor(Color.RED);
+        g2d.setStroke(new BasicStroke(0.1f));
         g2d.draw(circle(x, y, r, r));
         x += r * Math.sin(angle/2);
         y += r * Math.cos(angle/2);
         r = Math.max(0.1 * r, 5);
-        g2d.drawImage(im, (int) x - widthIm / 2, (int) y - heightIm / 2, null);
+        g2d.drawImage(im, (int) (x-2*widthIm), (int)(y - 2*heightIm), null);
     }
 
     public void Sun(int width, int height /*long M (масса)*/, Graphics2D g2d) {
@@ -53,12 +61,12 @@ public class Расчёты {
         int y = (int) (0.5 * height);
         Image im = null;
         try {
-            im = ImageIO.read(new File("C:\\Users\\dada\\Documents\\GitHub\\Project554\\src\\Main\\sun.png"));
+            im = ImageIO.read(new File("C:\\Users\\user2\\Documents\\GitHub\\Project554\\src\\Main\\res\\sun.png"));
         } catch (IOException e) {
         }
         int widthIm = im.getWidth(null);//узнаем размер изображения
         int heightIm = im.getHeight(null);
-        g2d.drawImage(im, x - widthIm / 2, y - heightIm / 2, null);
+        g2d.drawImage(im, x - widthIm/2, y - heightIm/2, null);
     }
 
     //    public void ускорение(int X0, int Y0, int x, int y, long G, long Mz, long Mp /* масса планеты*/,int T, double r, float ax, float ay){
