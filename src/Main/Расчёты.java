@@ -18,8 +18,8 @@ public class Расчёты {
             im = ImageIO.read(file);//кладем в im переданную картинку file
         } catch (IOException e) {//здесь можны вывести варнинги если картинка не прочиталась
         }
-
-        SizeImages(widthIm, heightIm, im);
+        int widthIm = im.getWidth(null);
+        int heightIm = im.getHeight(null);
         g2d.setColor(color); //цвет орбиты
         g2d.draw(circle(x, y, r, r));//рисует орбиту
         y += r * Math.sin(angle);
@@ -31,11 +31,8 @@ public class Расчёты {
         ДвижениеСпутника(x, y, r, g2d, angle);
     }
 
-    public void SizeImages(int width, int height, Image im){
-       width = im.getWidth(null);
-       height = im.getHeight(null);
-        System.out.print(width + " ");
-    }
+
+
 
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
         r = r * 3;
@@ -46,14 +43,15 @@ public class Расчёты {
         }
         int widthIm = 0;
         int heightIm = 0;
-        SizeImages(widthIm,heightIm,im);
+        widthIm = im.getWidth(null);
+        heightIm = im.getHeight(null);
         g2d.setColor(Color.RED);
         g2d.setStroke(new BasicStroke(0.1f));
         g2d.draw(circle(x, y, r, r));
-        x += r * Math.sin(angle/2);
-        y += r * Math.cos(angle/2);
+        x += r * Math.sin(3*angle);
+        y += r * Math.cos(3*angle);
         r = Math.max(0.1 * r, 5);
-        g2d.drawImage(im, (int) (x-2*widthIm), (int)(y - 2*heightIm), null);
+        g2d.drawImage(im, (int) (x-widthIm/2), (int)(y - heightIm/2), null);
     }
 
     public void Sun(int width, int height /*long M (масса)*/, Graphics2D g2d) {
@@ -69,19 +67,6 @@ public class Расчёты {
         g2d.drawImage(im, x - widthIm/2, y - heightIm/2, null);
     }
 
-    //    public void ускорение(int X0, int Y0, int x, int y, long G, long Mz, long Mp /* масса планеты*/,int T, double r, float ax, float ay){
-//        ax = (float) (Mz*G*Mp*(X0 - x)/(Math.pow(r, (double)3)));
-//        ay = (float) (Mz*G*Mp*(Y0 - y)/(Math.pow(r, (double)3)));
-//    }
-//
-//    public void скорость(int ax, int ay, int vx, int vy, int T){
-//        vx = vx + T*ax;
-//        vy = vy + T*ay;
-//    }
-//    public void новаяКоордината(int vy, int vx, int x, int y, int T){
-//        x = x + T*vx;
-//        y = y + T*vy;
-//    }
     private Shape circle(double x, double y, double a, double b) {
 
         return new Ellipse2D.Double(x - a, y - b, 2 * a, 2 * b); //что - то прописанное в библиотеке
