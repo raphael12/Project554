@@ -11,13 +11,14 @@ import java.net.URL;
 import java.applet.*;
 
 class PointOnCircle extends JComponent implements ActionListener {
-    private double angle;
+    public double angle;
     private Timer timer;
     private Applet applet = new Applet();
     public String curDir = new File("").getAbsolutePath();
     File earth = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earth.png");//сделайте чтоб было без ссылок!!!!!
     File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
     File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
+    File Sun = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
     public PointOnCircle() { //это основной счетсчик
         angle = 0;
         timer = new Timer(10, new ActionListener() {
@@ -43,9 +44,6 @@ class PointOnCircle extends JComponent implements ActionListener {
         int height = 700;
         Image im = null;
         try {
-            //im = Toolkit.getDefaultToolkit().createImage("sky3.jpg"); это попытки избавиться от ссылки
-          //  URL url = new URL(applet.getCodeBase(), "sky3.jpg");
-           // im = applet.getImage(applet.getCodeBase(), "sky3.jpg");
             im = ImageIO.read(BackGround);//в im кладем фон
         } catch (IOException e) {}
         g.fillRect(0, 0, width, height); //создает квадрат нужной величины(google в помощь)

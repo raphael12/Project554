@@ -8,7 +8,7 @@ import java.net.URL;
 
 
 public class Расчёты {
-
+    private PointOnCircle imagePoint = new PointOnCircle();
     public void движение(double width, double height, double r, double angle, Graphics2D g2d, Color color, File file) {
 
         Image im = null;
@@ -38,7 +38,7 @@ public class Расчёты {
         r = r * 3;
         Image im = null;
         try {
-            im = ImageIO.read(new File("C:\\Users\\user2\\Documents\\GitHub\\Project554\\src\\Main\\res\\moon.png"));
+            im = ImageIO.read(imagePoint.Moon);
         } catch (IOException e) {
         }
         int widthIm = 0;
@@ -59,7 +59,7 @@ public class Расчёты {
         int y = (int) (0.5 * height);
         Image im = null;
         try {
-            im = ImageIO.read(new File("C:\\Users\\user2\\Documents\\GitHub\\Project554\\src\\Main\\res\\sun.png"));
+            im = ImageIO.read(imagePoint.Sun);
         } catch (IOException e) {
         }
         int widthIm = im.getWidth(null);//узнаем размер изображения
