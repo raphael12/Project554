@@ -9,8 +9,10 @@ import java.net.URL;
 
 public class Расчёты {
     private EarthMoving imagePoint = new EarthMoving();
-    public void движение(double width, double height, double r, double angle, Graphics2D g2d, File file) {
+    double dt = 0.001;
 
+    public void движение(double width, double height, double r, double angle, Graphics2D g2d, File file, byte numOfMoons) {
+        int a;
         Image im = null;
         double x = 0.5 * width;//координаты центра
         double y = 0.5 * height;
@@ -27,13 +29,17 @@ public class Расчёты {
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
         g2d.setStroke(new BasicStroke(0.5f));//толщина круга, но как работает хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
-        g2d.drawImage(im,(int) (x-widthIm/2), (int)(y-heightIm/2), null);
-        if(SettingsFrame.checkBox1.isSelected()) {
-            ДвижениеСпутника(x, y, r, g2d, angle);
+        g2d.drawImage(im, (int) (x - widthIm / 2), (int) (y - heightIm / 2), null);
+        if (SettingsFrame.checkBox1.isSelected()) {
+            for (a = 0; a < numOfMoons; a++) {
+                if (r*Adding.TimerList.get(a) < r) {
+                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a)*2, g2d, angle * Adding.TimerList.get(a));
+                } else {
+                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a), g2d, angle * Adding.TimerList.get(a));
+                }
+            }
         }
     }
-
-
 
 
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
@@ -49,10 +55,10 @@ public class Расчёты {
         heightIm = im.getHeight(null);
         g2d.setColor(Color.RED);
         g2d.draw(circle(x, y, r, r));
-        x += r * Math.sin(3*angle);
-        y += r * Math.cos(3*angle);
+        x += r * Math.sin(3 * angle);
+        y += r * Math.cos(3 * angle);
         r = Math.max(0.1 * r, 5);
-        g2d.drawImage(im, (int) (x-widthIm/2), (int)(y - heightIm/2), null);
+        g2d.drawImage(im, (int) (x - widthIm / 2), (int) (y - heightIm / 2), null);
     }
 
     public void Sun(int width, int height /*long M (масса)*/, Graphics2D g2d) {
@@ -65,7 +71,7 @@ public class Расчёты {
         }
         int widthIm = im.getWidth(null);//узнаем размер изображения
         int heightIm = im.getHeight(null);
-        g2d.drawImage(im, x - widthIm/2, y - heightIm/2, null);
+        g2d.drawImage(im, x - widthIm / 2, y - heightIm / 2, null);
     }
 
     private Shape circle(double x, double y, double a, double b) {

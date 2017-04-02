@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class Planets extends JComponent implements ActionListener{
+public abstract class Planets extends JComponent implements ActionListener{//это скорее всего не понадобится
     static int width, height;
     Graphics2D g2d;
     private static double angle;
@@ -16,7 +16,8 @@ public abstract class Planets extends JComponent implements ActionListener{
     File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
     File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
     File Sun = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
-
+    private final byte maxNumOfMoons = 4;
+    public byte numOfMoons;
     public Planets() {
         timer = new Timer(20, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +45,7 @@ public abstract class Planets extends JComponent implements ActionListener{
         g.drawImage(im, 0, 0, null);//кидаем фон
         if (pulsing1 != false) {
         } else {
-            calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earth);//color нужен только для орбиты, нужно от него избатиься
+            calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earth, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
         }
         g2d=(Graphics2D) g;
         calc.Sun(width, height,g2d);//смотреть в расчетах
