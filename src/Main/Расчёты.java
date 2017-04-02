@@ -8,8 +8,8 @@ import java.net.URL;
 
 
 public class Расчёты {
-    private PointOnCircle imagePoint = new PointOnCircle();
-    public void движение(double width, double height, double r, double angle, Graphics2D g2d, Color color, File file) {
+    private EarthMoving imagePoint = new EarthMoving();
+    public void движение(double width, double height, double r, double angle, Graphics2D g2d, File file) {
 
         Image im = null;
         double x = 0.5 * width;//координаты центра
@@ -20,15 +20,17 @@ public class Расчёты {
         }
         int widthIm = im.getWidth(null);
         int heightIm = im.getHeight(null);
-        g2d.setColor(color); //цвет орбиты
+        g2d.setColor(Color.red); //цвет орбиты
         g2d.draw(circle(x, y, r, r));//рисует орбиту
         y += r * Math.sin(angle);
         x += r * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
-        g2d.setStroke(new BasicStroke(0.2f));//толщина круга, но как работает хз
+        g2d.setStroke(new BasicStroke(0.5f));//толщина круга, но как работает хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
         g2d.drawImage(im,(int) (x-widthIm/2), (int)(y-heightIm/2), null);
-        ДвижениеСпутника(x, y, r, g2d, angle);
+        if(SettingsFrame.checkBox1.isSelected()) {
+            ДвижениеСпутника(x, y, r, g2d, angle);
+        }
     }
 
 
@@ -46,7 +48,6 @@ public class Расчёты {
         widthIm = im.getWidth(null);
         heightIm = im.getHeight(null);
         g2d.setColor(Color.RED);
-        g2d.setStroke(new BasicStroke(0.1f));
         g2d.draw(circle(x, y, r, r));
         x += r * Math.sin(3*angle);
         y += r * Math.cos(3*angle);
