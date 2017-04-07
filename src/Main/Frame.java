@@ -45,7 +45,7 @@ public class Frame {
                     public void actionPerformed(ActionEvent e) {
                         if(pulsing) {
                             pulsing = false;
-                            SettingsFrame.SettingsFrame();//открываем фрейм м настройками
+                            SettingsFrame.SettingsFrame();//открываем фрейм c настройками
                         } else {
                             pulsing = true;
                         }

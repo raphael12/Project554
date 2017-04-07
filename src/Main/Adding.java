@@ -23,8 +23,11 @@ public class Adding extends JComponent implements ActionListener {
         for(k = 0; k < 50; k++){
             TimerList.add(k/10+0.5);//создаем массив коэффициентов
         }
-        for(int a = 0; SettingsFrame.i > a; a++){//добаляем итое-1 количество планет
-            calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle*TimerList.get(a), g2d, file, numberOfMoons.get(a));//добавляем планету
+        for(int a = 0; SettingsFrame.i >a; a++){//добаляем итое-1 количество планет
+            if (a%2 == 0)
+                calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle*TimerList.get(a), g2d, file, numberOfMoons.get(a));//добавляем планету
+            else
+                calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle*TimerList.get(a), g2d, EarthMoving.venera, numberOfMoons.get(a));
         }
     }
 

@@ -11,7 +11,8 @@ public abstract class Planets extends JComponent implements ActionListener{//—ç—
     Graphics2D g2d;
     private static double angle;
     private Timer timer;
-    public String curDir = new File("").getAbsolutePath();
+    public static String curDir = new File("").getAbsolutePath();
+    public static File venera = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\venera.jpg");
     File earth = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earth.png");
     File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
     File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
