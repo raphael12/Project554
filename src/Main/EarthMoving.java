@@ -11,7 +11,7 @@ class EarthMoving extends Planets{
 
     private Timer timer;
     public String curDir = new File("").getAbsolutePath();
-    static int width = 1000;
+    static int width = 800;
     static int height = 700;
 
     public EarthMoving() { //это основной счетсчик
