@@ -23,7 +23,9 @@ public class Расчёты {
         int widthIm = im.getWidth(null);
         int heightIm = im.getHeight(null);
         g2d.setColor(Color.red); //цвет орбиты
-        g2d.draw(circle(x, y, r, r));//рисует орбиту
+        if(SettingsFrame.checkBox2.isSelected()) {
+            g2d.draw(circle(x, y, r, r));//рисует орбиту
+        }
         y += r * Math.sin(angle);
         x += r * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
@@ -54,7 +56,9 @@ public class Расчёты {
         widthIm = im.getWidth(null);
         heightIm = im.getHeight(null);
         g2d.setColor(Color.RED);
-        g2d.draw(circle(x, y, r, r));
+        if(SettingsFrame.checkBox1.isSelected()) {
+            g2d.draw(circle(x, y, r, r));
+        }
         x += r * Math.sin(3 * angle);
         y += r * Math.cos(3 * angle);
         r = Math.max(0.1 * r, 5);

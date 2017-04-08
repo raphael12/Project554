@@ -19,13 +19,19 @@ public class SettingsFrame extends JFrame {
     static JPanel panel3 = new JPanel();
     static JPanel panel4 = new JPanel();
     static JPanel FinalPanel = new JPanel();
+    static JComboBox Size = new JComboBox();
+    static ButtonGroup setSize = new ButtonGroup();
     static public JFrame settingsFrame = new JFrame("Settings");
     public static Integer i = 0;
+    static JRadioButton Small = new JRadioButton("Small", false);
+    static JRadioButton Normal = new JRadioButton("Normal", true);
+    static JRadioButton Big = new JRadioButton("Big", false);
     public static void SettingsFrame() {
         panel1.setSize(400,100);
         panel2.setSize(400,100);
         panel3.setSize(400,100);
         panel2.add(checkBox1);
+        panel2.add(checkBox2);
         button2.setPreferredSize(new Dimension(80, 20));
         button3.setPreferredSize(new Dimension(80, 20));
         button4.setPreferredSize(new Dimension(80, 20));
@@ -40,7 +46,6 @@ public class SettingsFrame extends JFrame {
         panel1.add(SettingsFrame.textField2);
         panel1.add(SettingsFrame.button3);
         panel1.add(SettingsFrame.button2);
-
         button2.setText("Remove");
         button3.setText("Add");
         button4.setText("Width");
@@ -94,6 +99,15 @@ public class SettingsFrame extends JFrame {
                 } else {}
             }
         });
+
+        setSize.add(Small);
+        setSize.add(Normal);
+        setSize.add(Big);
+        panel2.setLayout(new GridBagLayout());
+        panel2.add(Small);
+        panel2.add(Normal);
+        panel2.add(Big);
+
         panel3.setLayout(new GridLayout(2, 2));
         FinalPanel.setLayout(new GridLayout(12,1));
         FinalPanel.add(panel1);

@@ -12,8 +12,15 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
     private static double angle;
     private Timer timer;
     static String curDir = new File("").getAbsolutePath();
-    static File venera = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earth.png");
-    File earth = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earth.png");
+    static File VeneraSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraSmall.png");
+    static File VeneraNormal = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraNormal.png");
+    static File VeneraBig = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraBig.png");
+    static File PlanetWithAsteroidSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidSmall.png");
+    static File PlanetWithAsteroidNormal = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidNormal.png");
+    static File PlanetWithAsteroidBig = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidBig.png");
+    static File earthSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthsmall.png");
+    static File earthNoraml = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthNormal.png");
+    static File earthBig = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthBig.png");
     File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
     File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
     File Sun = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
@@ -46,7 +53,7 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
         g.drawImage(im, 0, 0, null);//кидаем фон
         if (pulsing1 != false) {
         } else {
-            calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earth, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
+            calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earthSmall, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
         }
         g2d=(Graphics2D) g;
         calc.Sun(width, height,g2d);//смотреть в расчетах
