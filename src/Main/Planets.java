@@ -12,7 +12,7 @@ public abstract class Planets extends JComponent implements ActionListener{//—ç—
     private static double angle;
     private Timer timer;
     static String curDir = new File("").getAbsolutePath();
-    static File VeneraSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraSmall.png");
+     static File VeneraSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraSmall.png");
     static File VeneraNormal = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraNormal.png");
     static File VeneraBig = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraBig.png");
     static File PlanetWithAsteroidSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidSmall.png");
@@ -21,9 +21,14 @@ public abstract class Planets extends JComponent implements ActionListener{//—ç—
     static File earthSmall = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthsmall.png");
     static File earthNoraml = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthNormal.png");
     static File earthBig = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthBig.png");
-    File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
-    File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
-    File Sun = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
+    static File BackGround = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
+    static File Moon = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
+    static File RedGiand = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\RedGiand.png");
+    static File Sun128 = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
+    static File Sun96 = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun96.png");
+    static File Sun64 = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun64.png");
+    static File Sun32 = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun32.png");
+    static File Sun16 = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun16.png");
     private final byte maxNumOfMoons = 4;
     public byte numOfMoons;
     public Planets() {
