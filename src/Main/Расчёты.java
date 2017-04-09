@@ -16,10 +16,6 @@ public class Расчёты {
         Image im = null;
         double x = 0.5 * width;//координаты центра
         double y = 0.5 * height;
-        double ax=0;
-        double ay=0;
-        double vx=0;
-        double vy=0;
         try {
             im = ImageIO.read(file);//кладем в im переданную картинку file
         } catch (IOException e) {//здесь можны вывести варнинги если картинка не прочиталась
@@ -27,15 +23,11 @@ public class Расчёты {
         int widthIm = im.getWidth(null);
         int heightIm = im.getHeight(null);
         g2d.setColor(Color.red); //цвет орбиты
-        //g2d.draw(circle(x, y, x, y));//рисует орбиту
-        ax=x/(r*r*r);
-        ay=y/(r*r*r);
-        vx+=vx+ax;
-        vy+=vy+ay;
-        x+=x+vx;
-        y+=y+vy;
-        y += y * Math.sin(angle);
-        x += x * Math.cos(angle);
+        if(SettingsFrame.checkBox2.isSelected()) {
+            g2d.draw(circle(x, y, r, r));//рисует орбиту
+        }
+        y += r * Math.sin(angle);
+        x += r * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
         g2d.setStroke(new BasicStroke(0.5f));//толщина круга, но как работает хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
@@ -64,7 +56,9 @@ public class Расчёты {
         widthIm = im.getWidth(null);
         heightIm = im.getHeight(null);
         g2d.setColor(Color.RED);
-        g2d.draw(circle(x, y, r, r));
+        if(SettingsFrame.checkBox1.isSelected()) {
+            g2d.draw(circle(x, y, r, r));
+        }
         x += r * Math.sin(3 * angle);
         y += r * Math.cos(3 * angle);
         r = Math.max(0.1 * r, 5);

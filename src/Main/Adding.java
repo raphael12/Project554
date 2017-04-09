@@ -23,27 +23,27 @@ public class Adding extends JComponent implements ActionListener {
         for (k = 0; k < 50; k++) {
             TimerList.add(k / 10 + 0.5);//создаем массив коэффициентов
         }
-        for (int a = 0; SettingsFrame.i > a; a++) {//добаляем итое-1 количество планет
-            if (SettingsFrame.Small.isSelected()) {
-                if (a % 2 == 0) {
+        for (int a = 0; SettingsFrame.i > a; a++) {//добаляем итое-1 количество планет, здесь i смотриться из SettingsFrame
+            if (SettingsFrame.Small.isSelected()) {//смотрит какая RadioButton выбран
+                if (a % 3 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.earthSmall, numberOfMoons.get(a));//добавляем планету
-                } else if (a % 3 == 0) {
+                } else if (a % 2 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.VeneraSmall, numberOfMoons.get(a));
                 } else {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.PlanetWithAsteroidSmall, numberOfMoons.get(a));
                 }
             } else if (SettingsFrame.Normal.isSelected()) {
-                if (a % 2 == 0) {
+                if (a % 3 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.earthNoraml, numberOfMoons.get(a));//добавляем планету
-                } else if (a % 3 == 0) {
+                } else if (a % 2 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.VeneraNormal, numberOfMoons.get(a));
                 } else {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.PlanetWithAsteroidNormal, numberOfMoons.get(a));
                 }
             } else if (SettingsFrame.Big.isSelected()) {
-                if (a % 2 == 0) {
+                if (a % 3 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.earthBig, numberOfMoons.get(a));//добавляем планету
-                } else if (a % 3 == 0) {
+                } else if (a % 2 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.VeneraBig, numberOfMoons.get(a));
                 } else {
                     calc.движение(EarthMoving.width, EarthMoving.height, RadiusList.get(a), angle * TimerList.get(a), g2d, EarthMoving.PlanetWithAsteroidBig, numberOfMoons.get(a));
