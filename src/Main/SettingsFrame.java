@@ -108,7 +108,7 @@ public class SettingsFrame extends JFrame {
             }
         });
 
-        button7.addActionListener(new ActionListener() {
+        button7.addActionListener(new ActionListener() {//ZoomIn
             private boolean pulsing = true;
             public void actionPerformed(ActionEvent e) {
                 if (pulsing) {
@@ -116,7 +116,7 @@ public class SettingsFrame extends JFrame {
                 }
             }
         });
-        button8.addActionListener(new ActionListener() {
+        button8.addActionListener(new ActionListener() {//ZoomOut
             private boolean pulsing = true;
             public void actionPerformed(ActionEvent e) {
                 if (pulsing) {
