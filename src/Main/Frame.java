@@ -13,7 +13,7 @@ public class Frame {
     static void Frame() {
                 JFrame frame = new JFrame("Point on circle");
                 button1.setPreferredSize(new Dimension(80,20));
-                //button1.setText("Settings");
+                button1.setText("Settings");
                 JPanel panel = new JPanel();
                 panel.setLayout(new GridLayout(1,5,0,0));
                 panel.setPreferredSize(new Dimension(200,EarthMoving.height));
