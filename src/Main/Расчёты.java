@@ -79,7 +79,6 @@ public class Расчёты {
     }
 
     private Shape circle(double x, double y, double a, double b) {
-
         return new Ellipse2D.Double(x - a, y - b, 2 * a, 2 * b); //что - то прописанное в библиотеке
     }
 

@@ -21,7 +21,6 @@ public class SettingsFrame extends JFrame {
     static JPanel FinalPanel = new JPanel();
     static JComboBox Size = new JComboBox();
     static ButtonGroup setSize = new ButtonGroup();
-    static public JFrame settingsFrame = new JFrame("Settings");
     public static Integer i = 0;
     static JRadioButton Small = new JRadioButton("Small", false);
     static JRadioButton Normal = new JRadioButton("Normal", true);
@@ -39,7 +38,7 @@ public class SettingsFrame extends JFrame {
         textField1.setPreferredSize(new Dimension(80,20));
         textField2.setPreferredSize(new Dimension(80,20));
         textField3.setPreferredSize(new Dimension(80,20));
-        panel3.add(textField1);//для ввода массы
+        panel3.add(textField1);
         panel3.add(button4);
         panel3.add(textField3);
         panel3.add(button5);
@@ -50,18 +49,18 @@ public class SettingsFrame extends JFrame {
         button3.setText("Add");
         button4.setText("Width");
         button5.setText("Height");
-        FinalPanel.setSize(400, 400);
-        button3.addActionListener(new ActionListener() {
+        FinalPanel.setSize(400, EarthMoving.height);
+        button3.addActionListener(new ActionListener() {//на кнопке add весит листенер и ждет пока произойдет действие
             private boolean pulsing = true;
             public void actionPerformed(ActionEvent e) {//добавляем планету и радиус в массив
                 if (pulsing) {
                     if(new Double( textField2.getText()) != null) {
                         pulsing = true;
-                        i += 1;
-                        Adding.RadiusList.add(new Double(textField2.getText()));
+                        i += 1;//на эту i смотрит цикл добавления планет
+                        Adding.RadiusList.add(new Double(textField2.getText()));//при нажатии в массив добавляется радиус который считывается из textField2, также переводим String в Double
                         Adding.numberOfMoons.add((byte) (Math.random() * Adding.maxNumOfMoons));
                         //Adding.Mass.add(new Long(textField1.getText())); //массу добаляем
-                        textField2.setText("");
+                        textField2.setText(""); //обнуляем поле textField2
                     }
                 } else {}
             }
@@ -100,7 +99,7 @@ public class SettingsFrame extends JFrame {
             }
         });
 
-        setSize.add(Small);
+        setSize.add(Small);//добавляем в группу
         setSize.add(Normal);
         setSize.add(Big);
         panel2.setLayout(new GridBagLayout());
@@ -109,7 +108,7 @@ public class SettingsFrame extends JFrame {
         panel2.add(Big);
 
         panel3.setLayout(new GridLayout(2, 2));
-        FinalPanel.setLayout(new GridLayout(12,1));
+        FinalPanel.setLayout(new GridLayout(12,1));//разбивает основную панел на 12 стречек и 1 столбец
         FinalPanel.add(panel1);
         FinalPanel.add(panel2);
         FinalPanel.add(panel3);
