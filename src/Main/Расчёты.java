@@ -16,6 +16,10 @@ public class Расчёты {
         Image im = null;
         double x = 0.5 * width;//координаты центра
         double y = 0.5 * height;
+        double vx=0;
+        double vy=0;
+        double ax;
+        double ay;
         try {
             im = ImageIO.read(file);//кладем в im переданную картинку file
         } catch (IOException e) {//здесь можны вывести варнинги если картинка не прочиталась
@@ -24,10 +28,16 @@ public class Расчёты {
         int heightIm = im.getHeight(null);
         g2d.setColor(Color.red); //цвет орбиты
         if(SettingsFrame.checkBox2.isSelected()) {
-            g2d.draw(circle(x, y, r, r));//рисует орбиту
+            g2d.draw(circle(x, y, x, y));//рисует орбиту
         }
-        y += r * Math.sin(angle);
-        x += r * Math.cos(angle);
+        ax = x / (r*r*r);
+        ay = y / (r*r*r);
+        vx += ax;
+        vy += ay;
+        x += vx;
+        y += vy;
+        y += y * Math.sin(angle);
+        x += x * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
         g2d.setStroke(new BasicStroke(0.5f));//толщина круга, но как работает хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
@@ -70,7 +80,7 @@ public class Расчёты {
         int y = (int) (0.5 * height);
         Image im = null;
         try {
-            im = ImageIO.read(imagePoint.Sun);
+            im = ImageIO.read(imagePoint.Sun128);
         } catch (IOException e) {
         }
         int widthIm = im.getWidth(null);//узнаем размер изображения
