@@ -41,6 +41,7 @@ public class Расчёты {
         y += y * Math.sin(angle);
         x += x * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
+        g2d.setStroke(new BasicStroke(0.5f));//толщина круга, но как работает хз
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
         g2d.drawImage(im, (int) (x - widthIm / 2), (int) (y - heightIm / 2), null);
         if (SettingsFrame.checkBox1.isSelected()) {
@@ -105,6 +106,7 @@ public class Расчёты {
     }
 
     private Shape circle(double x, double y, double a, double b) {
+
         return new Ellipse2D.Double(x - a, y - b, 2 * a, 2 * b); //что - то прописанное в библиотеке
     }
 
