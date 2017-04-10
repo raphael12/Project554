@@ -26,7 +26,7 @@ public class Расчёты {
         }
         int widthIm = im.getWidth(null);
         int heightIm = im.getHeight(null);
-        g2d.setColor(Color.red); //цвет орбиты
+        g2d.setColor(Color.lightGray); //цвет орбиты
         if(SettingsFrame.checkBox2.isSelected()) {
             g2d.draw(circle(x, y, x, y));//рисует орбиту
         }
