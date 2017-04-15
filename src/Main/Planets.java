@@ -58,7 +58,7 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
         g.drawImage(im, 0, 0, null);//кидаем фон
         if (pulsing1 != false) {
         } else {
-            calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earthSmall, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
+          //  calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earthSmall, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
         }
         g2d=(Graphics2D) g;
         calc.Sun(width, height,g2d);//смотреть в расчетах

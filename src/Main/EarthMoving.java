@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 class EarthMoving extends Planets{
+
     public double angle = 0;
 
     private Timer timer;
@@ -13,7 +14,7 @@ class EarthMoving extends Planets{
     static int height = 700;
 
     public EarthMoving() { //это основной счетсчик
-        timer = new Timer(20, new ActionListener() {
+        timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 angle += 0.1;
                 repaint();
@@ -39,9 +40,11 @@ class EarthMoving extends Planets{
         g.fillRect(0, 0, width, height); //создает квадрат нужной величины(google в помощь)
         g.drawImage(im, 0, 0, null);//кидаем фон
         Graphics2D g2d = (Graphics2D) g;
+        g2d.setStroke(new BasicStroke(0.1f));
         Adding adding = new Adding();
         adding.addingPlanet(g2d,angle,earthSmall);
         calc.Sun(width, height,g2d);//смотреть в расчетах
     }
     public void actionPerformed(ActionEvent e) {}//прост
 }
+
