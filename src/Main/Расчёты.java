@@ -30,6 +30,10 @@ public class Расчёты {
         if(SettingsFrame.checkBox2.isSelected()) {
             g2d.draw(circle(x, y, r, r));//рисует орбиту
         }
+        double p = 10; // вообще равно ускорению своб падения на планете, так что исправлю
+        double e = 0.5; // эксцентриситет
+        double v = angle; // угол истинной аномалии(Маркеев 245 стр)
+        r = r * p/(1 + e * Math.cos(v));
         y += r * Math.sin(angle);
         x += r * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
