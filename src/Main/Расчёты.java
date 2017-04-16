@@ -10,6 +10,9 @@ import java.net.URL;
 public class Расчёты {
     final static public double G = 6.67408 * Math.pow(10, -11);
     final static public double MassSun = 1.989 * Math.pow(10, 30);
+    final static public double Kombo = Math.pow(10, 75);
+    public static Integer i = 0;
+    final static public double e = Math.random();
     private EarthMoving imagePoint = new EarthMoving();
     public double dt = 0.001;
 
@@ -30,10 +33,11 @@ public class Расчёты {
         if(SettingsFrame.checkBox2.isSelected()) {
             g2d.draw(circle(x, y, r, r));//рисует орбиту
         }
-        double p = 10; // вообще равно ускорению своб падения на планете, так что исправлю
-        double e = 0.5; // эксцентриситет
-        double v = angle; // угол истинной аномалии(Маркеев 245 стр)
-        r = r * p/(1 + e * Math.cos(v));
+        double c = r * Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i));
+        double k = G * MassSun; // нужная константа
+        double p = Kombo* c*c/k;
+        double vi = angle; // угол истинной аномалии(Маркеев 245 стр)
+        r = p/(1 + e * Math.cos(vi));
         y += r * Math.sin(angle);
         x += r * Math.cos(angle);
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
