@@ -92,9 +92,9 @@ public class SettingsFrame extends JFrame {
                     textField2.setText("");
                     pulsing = true;
                     Adding.K.add(MainParametr.getK(Adding.Mass.get(SettingsFrame.i)));
-                    Adding.H.add(MainParametr.getH(Adding.Vx.get(i), Adding.K.get(i), Adding.RadiusList.get(i)));
-                    Adding.A.add(MainParametr.getA(Adding.K.get(i), Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vx.get(i)*Adding.Vx.get(i)), Adding.RadiusList.get(i)));
-                    Adding.B.add(MainParametr.getB(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vx.get(i)*Adding.Vx.get(i)),Adding.RadiusList.get(i), Adding.K.get(i)));
+                    Adding.H.add(MainParametr.getH(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)), Adding.K.get(i), Adding.RadiusList.get(i)));
+                    Adding.A.add(MainParametr.getA(Adding.K.get(i), Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)), Adding.RadiusList.get(i)));
+                    Adding.B.add(MainParametr.getB(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)),Adding.RadiusList.get(i), Adding.K.get(i)));
                     Adding.E.add(MainParametr.getExentrisitet(r,Adding.K.get(i), Adding.H.get(i)));
                     System.out.println(" A: " + Adding.A.get(i) +  "  B: " + Adding.B.get(i) + "  H: " + Adding.H.get(i) + "  Ex: " + Adding.E.get(i) + "  K: " + Adding.K.get(i) + "  R: " + Adding.RadiusList.get(i) + "  X: " + Adding.coordinataX.get(i) + "  Y: " + Adding.coordinataY.get(i) + "  Mass: " + Adding.Mass.get(i));
                     i += 1;
