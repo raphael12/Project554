@@ -14,7 +14,18 @@ public class Adding extends JComponent implements ActionListener {
     public static ArrayList<Double> RadiusList = new ArrayList<Double>();//массив для радиусов
     public static ArrayList<Double> TimerList = new ArrayList<Double>();//массив для коэффициентов
     public static ArrayList<Byte> numberOfMoons = new ArrayList<Byte>();
-    private double k;
+    public  static ArrayList<Double> coordinataX = new ArrayList<Double>();
+    public  static ArrayList<Double> coordinataY = new ArrayList<Double>();
+    public  static ArrayList<Double> Vx = new ArrayList<Double>();
+    public  static ArrayList<Double> Vy = new ArrayList<Double>();
+    public  static ArrayList<Double> Ax = new ArrayList<Double>();
+    public  static ArrayList<Double> Ay = new ArrayList<Double>();
+    public  static ArrayList<Double> A = new ArrayList<Double>();
+    public  static ArrayList<Double> B = new ArrayList<Double>();
+    public  static ArrayList<Double> H = new ArrayList<Double>();
+    public  static ArrayList<Double> K = new ArrayList<Double>();
+    public  static ArrayList<Double> E = new ArrayList<Double>();
+     private double k;
     public final static byte maxNumOfMoons = 4;
     public byte numOfMoons;
 
