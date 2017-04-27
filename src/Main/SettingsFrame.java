@@ -17,11 +17,16 @@ public class SettingsFrame extends JFrame {
     static JTextField textField2 = new JTextField();
     static JTextField textField3 = new JTextField();
     static JTextField textField4 = new JTextField();
+    static JTextField textField5 = new JTextField();
+    static JTextField textField6 = new JTextField();
+    static JTextField textField7 = new JTextField();
     static JPanel panel1 = new JPanel();
     static JPanel panel2 = new JPanel();
     static JPanel panel3 = new JPanel();
     static JPanel panel4 = new JPanel();
     static JPanel panel6 = new JPanel();
+    static JPanel panel7 = new JPanel();
+    static JPanel panel8 = new JPanel();
     static JPanel FinalPanel = new JPanel();
     static JComboBox Size = new JComboBox();
     static ButtonGroup setSize = new ButtonGroup();
@@ -47,6 +52,9 @@ public class SettingsFrame extends JFrame {
         textField2.setPreferredSize(new Dimension(80,20));
         textField3.setPreferredSize(new Dimension(80,20));
         textField4.setPreferredSize(new Dimension(80,20));
+        textField5.setPreferredSize(new Dimension(120,20));
+        textField6.setPreferredSize(new Dimension(120,20));
+        textField7.setPreferredSize(new Dimension(120,20));
         panel3.add(textField1);
         panel3.add(button4);
         panel3.add(textField3);
@@ -55,48 +63,45 @@ public class SettingsFrame extends JFrame {
         panel1.add(SettingsFrame.button3);
         panel1.add(SettingsFrame.textField4);
         panel1.add(SettingsFrame.button2);
+        panel7.add(textField5);
+        panel7.add(textField6);
+        panel8.add(textField7);
         button2.setText("Remove");
-        button3.setText("Add M *10^6");
+        button3.setText("Add M ");
         button4.setText("X");
         button5.setText("Y");
         button7.setText("ZoomIn");
         button8.setText("ZoomOut");
         textField1.setText(String.valueOf(EarthMoving.width/2));
         textField3.setText(String.valueOf(EarthMoving.height/2));
-        FinalPanel.setSize(400, 400);
+        FinalPanel.setSize(new Dimension(200, 400));
         button3.addActionListener(new ActionListener() {
             private boolean pulsing = true;
             double x,y;
             public void actionPerformed(ActionEvent e) {//добавляем ма
                 if (pulsing) {
-                    //                        pulsing = true;
-//                        i += 1;//на эту i смотрит цикл добавления планет
-//                        Adding.RadiusList.add(new Double(textField2.getText()));//при нажатии в массив добавляется радиус который считывается из textField2, также переводим String в Double
-//                        Adding.numberOfMoons.add((byte) (Math.random() * Adding.maxNumOfMoons));
-//                        //Adding.Mass.add(new Long(textField1.getText())); //массу добаляем
-//                        textField2.setText(""); //обнуляем поле textField2
-
-
-                    x = Math.random()*EarthMoving.width*1000000/2;
-                    y = Math.random()*EarthMoving.height*1000000/2;
+                    x = Math.random()*EarthMoving.width;
+                    y = Math.random()*EarthMoving.height;
                     Adding.coordinataX.add(x);
                     Adding.coordinataY.add(y);
-                    double r = Math.sqrt((x-EarthMoving.width/2)*(x-EarthMoving.width/2)+(y-EarthMoving.width/2)*(y-EarthMoving.width/2));
                     Adding.Mass.add(new Long(textField2.getText())); //массу добаляем
-                    Adding.Ax.add(Расчёты.G * (x - EarthMoving.width / 2) * Adding.Mass.get(i) / (r * r * r));
-                    Adding.Ay.add(Расчёты.G *(y - EarthMoving.width / 2) * Adding.Mass.get(i) / (r * r * r));
-                    Adding.Vx.add(i, Adding.Ax.get(i) * 0.001 );
-                    Adding.Vy.add(i, Adding.Ay.get(i) * 0.001 );
-                    Adding.RadiusList.add(r);
+                    Adding.Ax.add(MainParametr.GetAxVx(i));
+                    Adding.Ay.add(MainParametr.GetAyVy(i));
+                    double ext =  Math.random();
+                    if(ext < 0.5){
+                        Adding.E.add( ext + 0.4);
+                    } else {
+                        Adding.E.add(ext);
+                    }
                     Adding.numberOfMoons.add((byte) (Math.random() * Adding.maxNumOfMoons));
                     textField2.setText("");
                     pulsing = true;
-                    Adding.K.add(MainParametr.getK(Adding.Mass.get(SettingsFrame.i)));
-                    Adding.H.add(MainParametr.getH(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)), Adding.K.get(i), Adding.RadiusList.get(i)));
-                    Adding.A.add(MainParametr.getA(Adding.K.get(i), Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)), Adding.RadiusList.get(i)));
-                    Adding.B.add(MainParametr.getB(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)),Adding.RadiusList.get(i), Adding.K.get(i)));
-                    Adding.E.add(MainParametr.getExentrisitet(r,Adding.K.get(i), Adding.H.get(i)));
-                    System.out.println(" A: " + Adding.A.get(i) +  "  B: " + Adding.B.get(i) + "  H: " + Adding.H.get(i) + "  Ex: " + Adding.E.get(i) + "  K: " + Adding.K.get(i) + "  R: " + Adding.RadiusList.get(i) + "  X: " + Adding.coordinataX.get(i) + "  Y: " + Adding.coordinataY.get(i) + "  Mass: " + Adding.Mass.get(i));
+//                    Adding.K.add(MainParametr.getK(Adding.Mass.get(SettingsFrame.i)));
+//                    Adding.H.add(MainParametr.getH(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)), Adding.K.get(i), Adding.RadiusList.get(i)));
+                    Adding.A.add(MainParametr.getA(i) );
+                    Adding.B.add(MainParametr.getB(i));
+//                 Adding.E.add(MainParametr.getExentrisitet(r,Adding.K.get(i), Adding.H.get(i)));
+                    System.out.println(" A: " + Adding.A.get(i) +  "  B: " + Adding.B.get(i) + "  Ex: " + Adding.E.get(i) +  "  X: " + Adding.coordinataX.get(i) + "  Y: " + Adding.coordinataY.get(i) + "  Mass: " + Adding.Mass.get(i) );
                     i += 1;
                 } else {}
             }
@@ -134,12 +139,16 @@ public class SettingsFrame extends JFrame {
                 } else {}
             }
         });
-
         button7.addActionListener(new ActionListener() {
             private boolean pulsing = true;
             public void actionPerformed(ActionEvent e) {
                 if (pulsing) {
-                    indicatorSize += 0.2;
+                    if (indicatorSize < 0.3) {
+                        indicatorSize +=0.01;
+                    } else {
+                        indicatorSize += 0.2;
+                    }
+
                 }
             }
         });
@@ -148,13 +157,18 @@ public class SettingsFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (pulsing) {
                     if (indicatorSize > 0) {
-                        indicatorSize -= 0.2;
+                        if (indicatorSize < 0.3) {
+                            indicatorSize -=0.01;
+                        } else {
+                            indicatorSize -= 0.2;
+                        }
                     }
                 }
             }
         });
-        textField1.setText(new String(String.valueOf(EarthMoving.width/2)));
-        textField3.setText(new String(String.valueOf(EarthMoving.height/2)));
+        textField1.setText(String.valueOf(EarthMoving.width / 2));
+        textField3.setText(String.valueOf(EarthMoving.height / 2));
+
         setSize.add(Small);//добавляем в группу
         setSize.add(Normal);
         setSize.add(Big);
@@ -171,4 +185,6 @@ public class SettingsFrame extends JFrame {
         FinalPanel.add(panel3);
         FinalPanel.add(panel4);
         FinalPanel.add(panel6);
+        FinalPanel.add(panel7);
+        FinalPanel.add(panel8);
     }}

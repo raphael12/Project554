@@ -8,47 +8,69 @@ import java.net.URL;
 
 
 public class Расчёты {
-    final static public double G = 6.67408 * Math.pow(10, -11);
-    final static public double MassSun = 1.989 * Math.pow(10, 30);
-    final static public double Kombo = Math.pow(10, 75);
-    public static Integer i = 0;
-    final static public double e = Math.random();
+    //final static public double G = 6.67408 * Math.pow(10, -11);
+    //final static public double MassSun = 1.989 * Math.pow(10, 2);
+    //final static public double Kombo = Math.pow(10, 75);
+    final static public double MassSun = 5000;
+    final static public double G = 1;
     private EarthMoving imagePoint = new EarthMoving();
     public double dt = 0.001;
 
-    public void движение(double width, double height, double r, double angle, Graphics2D g2d, File file, byte numOfMoons) {
+    public void движение(double width, double height, double angle1,double angle2, Graphics2D g2d, File file, byte numOfMoons, int index) {
+
         int a;
         Image im = null;
-        double x = 0.5 * width;//координаты центра
-        double y = 0.5 * height;
+        double X0 = 0.5 * width;//координаты центра
+        double Y0 = 0.5 * height;
+        double Vx = 0;
+        double Vy = 0;
+        double r = Math.sqrt( (Adding.coordinataX.get(index)-width/2) * (Adding.coordinataX.get(index) - width/2) + (Adding.coordinataY.get(index)-height/2) * (Adding.coordinataY.get(index)-height/2));
+        double c = r*Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
+        double p =c*c/(G*(Adding.Mass.get(index) + MassSun));
+        //r = r/(1 + Adding.E.get(index) * Math.cos(angle1));
+        SettingsFrame.textField7.setText(String.format("%(.2f",(r)));
         try {
             im = ImageIO.read(file);//кладем в im переданную картинку file
         } catch (IOException e) {//здесь можны вывести варнинги если картинка не прочиталась
         }
+        double x = X0;
+        double y = Y0;
+        x += 50*Adding.A.get(index)*SettingsFrame.indicatorSize* Math.cos(angle1);
+        y += 50*Adding.B.get(index)*SettingsFrame.indicatorSize* Math.sin(angle1);
+
+//        double Ax = - G * MassSun * x / (r*r*r);
+//        double Ay = - G * MassSun * y / (r*r*r);
+//        SettingsFrame.textField6.setText(String.format("%(.4f",Ax));
+       // SettingsFrame.textField7.setText(String.valueOf(Ay));
+//         Vx += Ax * (angle1 - angle2);
+//         Vy += Ay * (angle1 - angle2);
+
         int widthIm = im.getWidth(null);
         int heightIm = im.getHeight(null);
-
         g2d.setColor(Color.LIGHT_GRAY); //цвет орбиты
-        r = r * SettingsFrame.indicatorSize / 1000000;
+
         if(SettingsFrame.checkBox2.isSelected()) {
-            g2d.draw(circle(x, y, r, r));//рисует орбиту
+            g2d.draw(circle(X0-50*Adding.A.get(index)*Adding.E.get(index)*SettingsFrame.indicatorSize, Y0, 50*Adding.A.get(index)*SettingsFrame.indicatorSize, 50*Adding.B.get(index)*SettingsFrame.indicatorSize));//рисует орбиту
         }
-        double c = r * Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i));
-        double k = G * MassSun; // нужная константа
-        double p = Kombo* c*c/k;
-        double vi = angle; // угол истинной аномалии(Маркеев 245 стр)
-        r = p/(1 + e * Math.cos(vi));
-        y += r * Math.sin(angle);
-        x += r * Math.cos(angle);
+        //r = r * SettingsFrame.indicatorSize;
+        //double c = r * Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
+        //double p = c*c/Adding.K.get(index);
+
+        //y += Adding.B.get(index)*SettingsFrame.indicatorSize * Math.sin(angle);
+        //x += Adding.A.get(index)*SettingsFrame.indicatorSize * Math.cos(angle);
+
+        double E0 = Energy(Vx, Vy , Adding.coordinataX.get(index), Adding.coordinataY.get(index));
+        double Lo = Momentum(Vx, Vy, Adding.coordinataX.get(index), Adding.coordinataY.get(index));
+
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
-        g2d.drawImage(im, (int) (x - widthIm / 2), (int) (y - heightIm / 2), null);
+        g2d.drawImage(im, (int) ((-50*Adding.A.get(index)*Adding.E.get(index)*SettingsFrame.indicatorSize + x - widthIm / 2)), (int) ((y - heightIm / 2)), null);
         if (SettingsFrame.checkBox1.isSelected()) {
             for (a = 0; a < numOfMoons; a++) {
                 if (r*Adding.TimerList.get(a) < r) {
-                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a)*2, g2d, angle * Adding.TimerList.get(a));
+                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a)*2, g2d, angle1 * Adding.TimerList.get(a));
                 } else {
-                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a), g2d, angle * Adding.TimerList.get(a));
+                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a), g2d, angle1 * Adding.TimerList.get(a));
                 }
             }
         }
@@ -100,6 +122,8 @@ public class Расчёты {
 
 
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
+
+
         r = r * 3;
         Image im = null;
         try {
@@ -120,7 +144,7 @@ public class Расчёты {
         g2d.drawImage(im, (int) (x - widthIm / 2), (int) (y - heightIm / 2), null);
     }
 
-    static public void Sun(int width, int height /*long M (масса)*/, Graphics2D g2d) {
+    static public void Sun(int width, int height , Graphics2D g2d) {
         int x = (int) (0.5 * width);//координаты центра
         int y = (int) (0.5 * height);
         Image im = null;
@@ -129,7 +153,7 @@ public class Расчёты {
                 im = ImageIO.read(EarthMoving.Sun96);
             } else if(SettingsFrame.indicatorSize == 1.2){
                 im = ImageIO.read(EarthMoving.Sun128);
-            } else if(SettingsFrame.indicatorSize >= 1.4){
+            } else if(SettingsFrame.indicatorSize > 1.2){
                 im = ImageIO.read(EarthMoving.RedGiand);
             } else if(SettingsFrame.indicatorSize <= 0.9 && SettingsFrame.indicatorSize >= 0.7){
                 im = ImageIO.read(EarthMoving.Sun64);
@@ -139,34 +163,23 @@ public class Расчёты {
                 im = ImageIO.read(EarthMoving.Sun16);
             }
 
-
-
         } catch (IOException e) {
         }
         int widthIm = im.getWidth(null);//узнаем размер изображения
         int heightIm = im.getHeight(null);
-        g2d.drawImage(im, x - widthIm / 2 , y - heightIm / 2, null);
+        g2d.drawImage(im,    x - widthIm / 2 , y - heightIm / 2, null);
     }
 
-    private Shape circle(double x, double y, double a, double b) {
+    static public double Energy(double Vx, double Vy, double x, double y){
+        return 0.5 * (Vx * Vx + Vy * Vy) - G * MassSun / Math.sqrt(x*x+y*y);
+    }
 
+    static public double Momentum (double Vx, double Vy, double x, double y){
+        return x * Vy - y * Vx;
+    }
+    private Shape circle(double x, double y, double a, double b) {
         return new Ellipse2D.Double(x - a, y - b, 2 * a, 2 * b); //что - то прописанное в библиотеке
     }
 
-    public double getTheta(double yPos, double xPos) {
-        double theta = Math.atan(yPos/xPos);
-        if (xPos < 0)
-            theta = Math.PI + theta;
-        else if (xPos > 0 && yPos < 0)
-            theta = 2*Math.PI + theta;
-        return theta;
-    }
-    public  double  getK(double mass){
-        return G*(mass + MassSun);
-    }
-
-    public double getA(double k, double v, double r){
-        return k/(v*v - 2*k/r);
-    }
 
 }
