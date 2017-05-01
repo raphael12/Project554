@@ -29,11 +29,12 @@ public class Adding extends JComponent implements ActionListener {
     public final static byte maxNumOfMoons = 4;
     public byte numOfMoons;
 
-    public void addingPlanet(Graphics2D g2d, double angle1,double angle2,  File file) {
+    public void addingPlanet(Graphics2D g2d, double angle1,double angle2,  Image file) {
 
         numOfMoons = (byte) (Math.random() * maxNumOfMoons);
         TimerList = new ArrayList<Double>();
         for (k = 0; k < 50; k++) {
+            TimerList.remove(k);
             TimerList.add(k / 10 + 0.5);//создаем массив коэффициентов
         }
         for (int a = 0; SettingsFrame.i > a; a++) {//добаляем итое-1 количество планет, здесь i смотриться из SettingsFrame
@@ -47,7 +48,7 @@ public class Adding extends JComponent implements ActionListener {
                 }
             } else if (SettingsFrame.Normal.isSelected()) {
                 if (a % 3 == 0) {
-                    calc.движение(EarthMoving.width, EarthMoving.height,  angle1, angle2 , g2d, EarthMoving.earthNoraml, numberOfMoons.get(a), a);//добавляем планету
+                    calc.движение(EarthMoving.width, EarthMoving.height,  angle1, angle2 , g2d, EarthMoving.earthNormal, numberOfMoons.get(a), a);//добавляем планету
                 } else if (a % 2 == 0) {
                     calc.движение(EarthMoving.width, EarthMoving.height, angle1, angle2 , g2d, EarthMoving.VeneraNormal, numberOfMoons.get(a), a);
                 } else {

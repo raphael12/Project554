@@ -140,6 +140,7 @@ public class SettingsFrame extends JFrame {
                 } else {}
             }
         });
+
         button7.addActionListener(new ActionListener() {
             private boolean pulsing = true;
             public void actionPerformed(ActionEvent e) {

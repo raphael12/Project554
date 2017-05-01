@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -13,10 +14,40 @@ public class Расчёты {
     //final static public double Kombo = Math.pow(10, 75);
     final static public double MassSun = 5000;
     final static public double G = 1;
-    private EarthMoving imagePoint = new EarthMoving();
     public double dt = 0.001;
+    private EarthMoving imagePoint = new EarthMoving();
 
-    public void движение(double width, double height, double angle1,double angle2, Graphics2D g2d, File file, byte numOfMoons, int index) {
+    static public void Sun(int width, int height , Graphics2D g2d) {
+        int x = (int) (0.5 * width);//координаты центра
+        int y = (int) (0.5 * height);
+        Image im = null;
+            if(SettingsFrame.indicatorSize == 1){
+                im = EarthMoving.Sun96;
+            } else if(SettingsFrame.indicatorSize == 1.2){
+                im = EarthMoving.Sun128;
+            } else if(SettingsFrame.indicatorSize > 1.2){
+                im = EarthMoving.RedGiand;
+            } else if(SettingsFrame.indicatorSize <= 0.9 && SettingsFrame.indicatorSize >= 0.7){
+                im = EarthMoving.Sun64;
+            } else if(SettingsFrame.indicatorSize <= 0.7 && SettingsFrame.indicatorSize > 0.5){
+                im = EarthMoving.Sun32;
+            } else if(SettingsFrame.indicatorSize <= 0.5 && SettingsFrame.indicatorSize > 0){
+                im =EarthMoving.Sun16;
+            }
+        int widthIm = im.getWidth(null);//узнаем размер изображения
+        int heightIm = im.getHeight(null);
+        g2d.drawImage(im,    x - widthIm / 2 , y - heightIm / 2, null);
+    }
+
+    static public double Energy(double Vx, double Vy, double x, double y){
+        return 0.5 * (Vx * Vx + Vy * Vy) - G * MassSun / Math.sqrt(x*x+y*y);
+    }
+
+    static public double Momentum (double Vx, double Vy, double x, double y){
+        return x * Vy - y * Vx;
+    }
+
+    public void движение(double width, double height, double angle1,double angle2, Graphics2D g2d, Image file, byte numOfMoons, int index) {
 
         int a;
         Image im = null;
@@ -29,10 +60,9 @@ public class Расчёты {
         double p =c*c/(G*(Adding.Mass.get(index) + MassSun));
         //r = r/(1 + Adding.E.get(index) * Math.cos(angle1));
         SettingsFrame.textField7.setText(String.format("%(.2f",(r)));
-        try {
-            im = ImageIO.read(file);//кладем в im переданную картинку file
-        } catch (IOException e) {//здесь можны вывести варнинги если картинка не прочиталась
-        }
+
+            im = file;
+
         double x = X0;
         double y = Y0;
         x += 50*Adding.A.get(index)*SettingsFrame.indicatorSize* Math.cos(angle1);
@@ -120,16 +150,12 @@ public class Расчёты {
 //        }
     }
 
-
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
 
 
         r = r * 3;
         Image im = null;
-        try {
-            im = ImageIO.read(imagePoint.Moon);
-        } catch (IOException e) {
-        }
+        im = EarthMoving.Moon;
         int widthIm = 0;
         int heightIm = 0;
         widthIm = im.getWidth(null);
@@ -144,39 +170,6 @@ public class Расчёты {
         g2d.drawImage(im, (int) (x - widthIm / 2), (int) (y - heightIm / 2), null);
     }
 
-    static public void Sun(int width, int height , Graphics2D g2d) {
-        int x = (int) (0.5 * width);//координаты центра
-        int y = (int) (0.5 * height);
-        Image im = null;
-        try {
-            if(SettingsFrame.indicatorSize == 1){
-                im = ImageIO.read(EarthMoving.Sun96);
-            } else if(SettingsFrame.indicatorSize == 1.2){
-                im = ImageIO.read(EarthMoving.Sun128);
-            } else if(SettingsFrame.indicatorSize > 1.2){
-                im = ImageIO.read(EarthMoving.RedGiand);
-            } else if(SettingsFrame.indicatorSize <= 0.9 && SettingsFrame.indicatorSize >= 0.7){
-                im = ImageIO.read(EarthMoving.Sun64);
-            } else if(SettingsFrame.indicatorSize <= 0.7 && SettingsFrame.indicatorSize > 0.5){
-                im = ImageIO.read(EarthMoving.Sun32);
-            } else if(SettingsFrame.indicatorSize <= 0.5 && SettingsFrame.indicatorSize > 0){
-                im = ImageIO.read(EarthMoving.Sun16);
-            }
-
-        } catch (IOException e) {
-        }
-        int widthIm = im.getWidth(null);//узнаем размер изображения
-        int heightIm = im.getHeight(null);
-        g2d.drawImage(im,    x - widthIm / 2 , y - heightIm / 2, null);
-    }
-
-    static public double Energy(double Vx, double Vy, double x, double y){
-        return 0.5 * (Vx * Vx + Vy * Vy) - G * MassSun / Math.sqrt(x*x+y*y);
-    }
-
-    static public double Momentum (double Vx, double Vy, double x, double y){
-        return x * Vy - y * Vx;
-    }
     private Shape circle(double x, double y, double a, double b) {
         return new Ellipse2D.Double(x - a, y - b, 2 * a, 2 * b); //что - то прописанное в библиотеке
     }

@@ -37,9 +37,9 @@ class EarthMoving extends Planets{
         Расчёты calc = new Расчёты();//создаем переменную класса Расчёты
 
         Image im = null;
-        try {
-            im = ImageIO.read(BackGround);//в im кладем фон
-        } catch (IOException e) {}
+
+        im = BackGround;
+
         g.fillRect(0, 0, width, height); //создает квадрат нужной величины(google в помощь)
         g.drawImage(im, 0, 0, null);//кидаем фон
         Graphics2D g2d = (Graphics2D) g;
