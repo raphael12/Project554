@@ -7,29 +7,32 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class Planets extends JComponent implements ActionListener{//это скорее всего не понадобится
+    static public boolean pulsing1 = true;
     static int width, height;
-    Graphics2D g2d;
-    private static double angle;
-    private Timer timer;
-    static String curDir = new File("").getAbsolutePath();
-    static File VeneraSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraSmall.png");
-    static File VeneraNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraNormal.png");
-    static File VeneraBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraBig.png");
-    static File PlanetWithAsteroidSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidSmall.png");
-    static File PlanetWithAsteroidNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidNormal.png");
-    static File PlanetWithAsteroidBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidBig.png");
-    static File earthSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthsmall.png");
-    static File earthNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthNormal.png");
-    static File earthBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthBig.png");
-    static File BackGroundUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
-    static File MoonUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
-    static File RedGiandUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\RedGiand.png");
-    static File Sun128Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
-    static File Sun96Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun96.png");
-    static File Sun64Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun64.png");
-    static File Sun32Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun32.png");
-    static File Sun16Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun16.png");
     static Image VeneraSmall, VeneraNormal, VeneraBig, PlanetWithAsteroidSmall, PlanetWithAsteroidNormal, PlanetWithAsteroidBig, earthSmall, earthNormal, earthBig, BackGround, Moon, RedGiand, Sun128, Sun96, Sun64, Sun32, Sun16;
+    private static double angle;
+    private  static String curDir = new File("").getAbsolutePath();
+    private  static File VeneraSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraSmall.png");
+    private static File VeneraNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraNormal.png");
+    private static File VeneraBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\VeneraBig.png");
+    private static File PlanetWithAsteroidSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidSmall.png");
+    private static File PlanetWithAsteroidNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidNormal.png");
+    private static File PlanetWithAsteroidBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\PlanetWithAsteroidBig.png");
+    private static File earthSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthsmall.png");
+    private static File earthNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthNormal.png");
+    private  static File earthBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthBig.png");
+    private  static File BackGroundUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
+    private static File MoonUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
+    private static File RedGiandUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\RedGiand.png");
+    private  static File Sun128Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
+    private  static File Sun96Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun96.png");
+    private  static File Sun64Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun64.png");
+    private  static File Sun32Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun32.png");
+    private  static File Sun16Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun16.png");
+    private final byte maxNumOfMoons = 4;
+    public byte numOfMoons;
+    Graphics2D g2d;
+    private Timer timer;
 
     public static void AddingImage(){
         try {
@@ -55,26 +58,13 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
         }
     }
 
-
-
-
-    private final byte maxNumOfMoons = 4;
-    public byte numOfMoons;
-    public Planets() {
-        timer = new Timer(20, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                angle += 0.1;
-                repaint();
-            }
-        });
-        timer.start();
-    }
     public void start() {
         timer.start();
     }//запускает счетсчик
+
     public void stop() {
         timer.stop();}//останавливает таймер
-    static public boolean pulsing1 = true;
+
     @Override
     protected void paintComponent(Graphics g) {
         Расчёты calc = new Расчёты();//создаем переменную класса Расчёты

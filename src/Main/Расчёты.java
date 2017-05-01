@@ -1,11 +1,5 @@
-import javax.imageio.ImageIO;
-import javax.imageio.stream.ImageInputStream;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 
 public class Расчёты {
@@ -39,41 +33,52 @@ public class Расчёты {
         g2d.drawImage(im,    x - widthIm / 2 , y - heightIm / 2, null);
     }
 
-    static public double Energy(double Vx, double Vy, double x, double y){
-        return 0.5 * (Vx * Vx + Vy * Vy) - G * MassSun / Math.sqrt(x*x+y*y);
+    static public double EnergyConst(double Vx, double Vy, double x, double y, int index){
+        return 0.5 * (Vx * Vx + Vy * Vy) - G * (MassSun)/ Math.sqrt((x*x+y*y));
     }
-
+    static public double Energy(double Vx, double Vy, double x, double y, int index){
+        return 0.5 * (Vx * Vx + Vy * Vy) - G * (MassSun)/ Math.sqrt(x*x+y*y);
+    }
+    static public double GetW(double x, double y, int index, double E0){
+        return Math.sqrt((2*G*(MassSun))/Math.pow((x*x+y*y), 3/2)+2*E0/(x*x+y*y));
+    }
     static public double Momentum (double Vx, double Vy, double x, double y){
         return x * Vy - y * Vx;
     }
 
-    public void движение(double width, double height, double angle1,double angle2, Graphics2D g2d, Image file, byte numOfMoons, int index) {
-
+    public void движение(double width, double height, double angle1,double angle2, Graphics2D g2d, Image im, byte numOfMoons, int index) {
         int a;
-        Image im = null;
         double X0 = 0.5 * width;//координаты центра
         double Y0 = 0.5 * height;
         double Vx = 0;
         double Vy = 0;
-        double r = Math.sqrt( (Adding.coordinataX.get(index)-width/2) * (Adding.coordinataX.get(index) - width/2) + (Adding.coordinataY.get(index)-height/2) * (Adding.coordinataY.get(index)-height/2));
-        double c = r*Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
-        double p =c*c/(G*(Adding.Mass.get(index) + MassSun));
+        double r;
+        //double r = Math.sqrt( (Adding.coordinataX.get(index)-width/2) * (Adding.coordinataX.get(index) - width/2) + (Adding.coordinataY.get(index)-height/2) * (Adding.coordinataY.get(index)-height/2));
+        //double c = r*Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
+        // double p =c*c/(G*(Adding.Mass.get(index) + MassSun));
         //r = r/(1 + Adding.E.get(index) * Math.cos(angle1));
-        SettingsFrame.textField7.setText(String.format("%(.2f",(r)));
-
-            im = file;
-
+        // SettingsFrame.textField7.setText(String.format("%(.2f",(r)));
+        //double Lo = Momentum(Vx, Vy, Adding.coordinataX.get(index), Adding.coordinataY.get(index));
         double x = X0;
         double y = Y0;
         x += 50*Adding.A.get(index)*SettingsFrame.indicatorSize* Math.cos(angle1);
         y += 50*Adding.B.get(index)*SettingsFrame.indicatorSize* Math.sin(angle1);
 
+        double E0 = EnergyConst(Vx, Vy , Adding.coordinataX.get(index), Adding.coordinataY.get(index), index);
+        SettingsFrame.textField4.setText(String.format("%(.2f",(E0)));
 //        double Ax = - G * MassSun * x / (r*r*r);
 //        double Ay = - G * MassSun * y / (r*r*r);
 //        SettingsFrame.textField6.setText(String.format("%(.4f",Ax));
-       // SettingsFrame.textField7.setText(String.valueOf(Ay));
+        // SettingsFrame.textField7.setText(String.valueOf(Ay));
 //         Vx += Ax * (angle1 - angle2);
 //         Vy += Ay * (angle1 - angle2);
+        double w =20* GetW(x,y,index,E0);
+        SettingsFrame.textField6.setText(String.format("%(.2f", w));
+//        x = X0 + 50*Adding.A.get(index)*SettingsFrame.indicatorSize*( Math.cos((w + angle1)));
+//        y = Y0 + 50*Adding.B.get(index)*SettingsFrame.indicatorSize*( Math.sin((w + angle1)));
+        r = Math.sqrt((x-X0)*(x-X0)+(y-Y0)*(y-Y0));
+//        SettingsFrame.textField7.setText(String.format("%(.2f", r));
+
 
         int widthIm = im.getWidth(null);
         int heightIm = im.getHeight(null);
@@ -88,9 +93,6 @@ public class Расчёты {
 
         //y += Adding.B.get(index)*SettingsFrame.indicatorSize * Math.sin(angle);
         //x += Adding.A.get(index)*SettingsFrame.indicatorSize * Math.cos(angle);
-
-        double E0 = Energy(Vx, Vy , Adding.coordinataX.get(index), Adding.coordinataY.get(index));
-        double Lo = Momentum(Vx, Vy, Adding.coordinataX.get(index), Adding.coordinataY.get(index));
 
         r = Math.max(0.1 * r, 5);//превращает радиус орбиты в радиус круга
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);//что это?!!!!!
