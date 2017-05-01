@@ -61,7 +61,6 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
           //  calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earthSmall, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
         }
         g2d=(Graphics2D) g;
-        calc.Sun(width, height,g2d);//смотреть в расчетах
         g2d.setStroke(new BasicStroke(0.2f));//толщина круга, но как работает хз
     }
 

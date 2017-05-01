@@ -7,7 +7,8 @@ import java.io.IOException;
 
 class EarthMoving extends Planets{
 
-    public double angle = 0;
+    public double angle1 = 0;
+    public double angle2 = -0.01;
 
     private Timer timer;
     static int width = 800;
@@ -16,7 +17,9 @@ class EarthMoving extends Planets{
     public EarthMoving() { //это основной счетсчик
         timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                angle += 0.1;
+                angle1 += 0.1;
+                angle2 += 0.1;
+                SettingsFrame.textField5.setText(String.valueOf(angle1));
                 repaint();
             }
         });
@@ -42,7 +45,7 @@ class EarthMoving extends Planets{
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(0.1f));
         Adding adding = new Adding();
-        adding.addingPlanet(g2d,angle,earthSmall);
+        adding.addingPlanet(g2d,angle1,angle2,earthSmall);
         calc.Sun(width, height,g2d);//смотреть в расчетах
     }
     public void actionPerformed(ActionEvent e) {}//прост

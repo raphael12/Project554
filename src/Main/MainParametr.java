@@ -2,9 +2,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainParametr {
-    final static public double G = 6.67408 * Math.pow(10, -11);
-    final static public double MassSun = 1.989 * Math.pow(10, 30);
-
+//    final static public double G = 6.67408 * Math.pow(10, -11);
+//    final static public double MassSun = 1.989 * Math.pow(10, 13);
+    final static public double MassSun = 5000;
+    final static public double G = 1;
     public static double getTheta(double yPos, double xPos) {
         double theta = Math.atan(yPos/xPos);
         if (xPos < 0)
@@ -14,19 +15,56 @@ public class MainParametr {
         return theta;
     }
     public static double  getK(double mass){
-        return G*(mass * 1000000 + MassSun);
+        return G*MassSun;
     }
 
-    public static double getA(double k, double v, double r){
-        return k/(v*v - 2*k/r);
+    public static double getA( int index){
+        double r = (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2);
+        double c = r * Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
+        double p =c*c/(G*MassSun);
+
+        if((p/(1 - Adding.E.get(index)*Adding.E.get(index))) > 30000){
+            return Adding.A.get(index-1)+100;
+        } else if((p/(1 - Adding.E.get(index)*Adding.E.get(index))) > 12000) {
+            return p/(10*(1 - Adding.E.get(index)*Adding.E.get(index)));
+        } else {
+            return p / (1 - Adding.E.get(index) * Adding.E.get(index));
+        }
     }
-    public static double getB(double v, double r, double k){
-        return 1000/(-v*v + 2*k/r);// где c число
+    public static double getB( int index){
+        double r = (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2);
+
+        double c = r*Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
+        double p =c*c/(G*(Adding.Mass.get(index) + MassSun));
+        if((p / (Math.sqrt(1 -  Adding.E.get(index)*Adding.E.get(index))) > 30000)) {
+            return Adding.B.get(index-1)+100;
+        }else if(p /Math.sqrt(1 -  Adding.E.get(index)*Adding.E.get(index)) > 12500) {
+            return p / (10*Math.sqrt(1 - Adding.E.get(index)*Adding.E.get(index)));
+        } else {
+            return p / (Math.sqrt(1 -  Adding.E.get(index)*Adding.E.get(index)));
+        }
+    }
+
+    public static double GetAxVx(int index){
+        double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
+        double Ax, Vx;
+        Ax =  - G * MassSun * Adding.coordinataX.get(index) / (r*r*r);
+        Vx = Ax * 0.01;
+        Adding.Vx.add(index, Vx);
+       return   Ax;
+    }
+    public static double GetAyVy(int index){
+        double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
+        double Ay, Vy;
+        Ay =  - G * MassSun * Adding.coordinataY.get(index) / (r*r*r);
+        Vy = Ay * 0.01;
+        Adding.Vy.add(index, Vy);
+        return  Ay;
     }
     public static double getH(double v, double k, double r){
         return v*v-2*k/r;
     }
-    public static double getExentrisitet(double r, double k, double h){
-        return Math.sqrt(1+h/(k*k));
-    }
+//    public static double getExentrisitet(double r, double k, double h){
+//        return Math.sqrt(1+h/(k*k));
+//    }
 }
