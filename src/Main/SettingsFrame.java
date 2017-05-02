@@ -20,6 +20,9 @@ public class SettingsFrame extends JFrame {
     static JTextField textField5 = new JTextField();
     static JTextField textField6 = new JTextField();
     static JTextField textField7 = new JTextField();
+    static JTextArea textArea = new JTextArea();
+    static JTextArea textArea2 = new JTextArea();
+    static JTextArea textArea3 = new JTextArea();
     static JPanel panel1 = new JPanel();
     static JPanel panel2 = new JPanel();
     static JPanel panel3 = new JPanel();
@@ -27,6 +30,11 @@ public class SettingsFrame extends JFrame {
     static JPanel panel6 = new JPanel();
     static JPanel panel7 = new JPanel();
     static JPanel panel8 = new JPanel();
+    static JPanel panel9 = new JPanel();
+    static JPanel panel10 = new JPanel();
+    static JPanel panel11 = new JPanel();
+    static JPanel panel12 = new JPanel();
+    static JPanel panel13 = new JPanel();
     static JPanel FinalPanel = new JPanel();
     static JComboBox Size = new JComboBox();
     static ButtonGroup setSize = new ButtonGroup();
@@ -37,12 +45,25 @@ public class SettingsFrame extends JFrame {
     static JRadioButton Big = new JRadioButton("Big", false);
     public static void SettingsFrame() {
         panel1.setSize(400,100);
-        panel2.setSize(400,100);
-        panel3.setSize(400,100);
+        panel9.setSize(400,20);
+        panel10.setSize(400, 20);
+        panel11.setSize(400, 20);
+        panel12.setSize(400, 20);
+        panel13.setSize(400, 20);
+        panel2.setSize(400,20);
+        panel3.setSize(400,20);
+
+       textArea.setText("Показать/скрыть спутники ");
+       textArea2.setText("Показать/скрыть траекторию");
+       textArea3.setText("Размер планет");
+       panel9.add(textArea);
+       panel10.add(textArea2);
+       panel12.add(textArea3);
         panel2.add(checkBox1);
-        panel2.add(checkBox2);
+        panel11.add(checkBox2);
         panel6.add(button7);
         panel6.add(button8);
+        //textArea.setPreferredSize(new Dimension(200, 20));
         button2.setPreferredSize(new Dimension(110, 20));
         button3.setPreferredSize(new Dimension(110, 20));
         button4.setPreferredSize(new Dimension(80, 20));
@@ -67,6 +88,7 @@ public class SettingsFrame extends JFrame {
         panel7.add(textField5);
         panel7.add(textField6);
         panel8.add(textField7);
+
         button2.setText("Remove");
         button3.setText("Add M ");
         button4.setText("X");
@@ -174,16 +196,21 @@ public class SettingsFrame extends JFrame {
         setSize.add(Small);//добавляем в группу
         setSize.add(Normal);
         setSize.add(Big);
-        panel2.setLayout(new GridBagLayout());
-        panel2.add(Small);
-        panel2.add(Normal);
-        panel2.add(Big);
+        panel13.setLayout(new GridBagLayout());
+        panel13.add(Small);
+        panel13.add(Normal);
+        panel13.add(Big);
 
         panel3.setLayout(new GridLayout(2, 2, 10,10));
         panel6.setLayout(new GridLayout(1, 2, 10,10));
-        FinalPanel.setLayout(new GridLayout(12,1));//разбивает основную панел на 12 стречек и 1 столбец
+        FinalPanel.setLayout(new GridLayout(13,1));//разбивает основную панел на 13 стречек и 1 столбец
         FinalPanel.add(panel1);
+        FinalPanel.add(panel9);
         FinalPanel.add(panel2);
+        FinalPanel.add(panel10);
+        FinalPanel.add(panel11);
+        FinalPanel.add(panel12);
+        FinalPanel.add(panel13);
         FinalPanel.add(panel3);
         FinalPanel.add(panel4);
         FinalPanel.add(panel6);
