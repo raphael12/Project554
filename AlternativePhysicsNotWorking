@@ -33,10 +33,10 @@ public class Расчёты {
         int heightIm = im.getHeight(null);
         g2d.drawImage(im,    x - widthIm / 2 , y - heightIm / 2, null);
     }
-    static public double ForceX(int index){ //горизонтальная проекция силы
+    static public double ForceX(double x, double y, int index){ //горизонтальная проекция силы
         return G*MassSun*Adding.Mass.get(index)*Adding.coordinataX.get(index)/Math.pow(((Adding.coordinataX.get(index)*Adding.coordinataX.get(index)+Adding.coordinataY.get(index)*Adding.coordinataY.get(index))), 3/2);
     }
-    static public double ForceY(int index){ //вертикальная проекция силы
+    static public double ForceY(double x, double y, int index){ //вертикальная проекция силы
         return G*MassSun*Adding.Mass.get(index)*Adding.coordinataY.get(index)/Math.pow(((Adding.coordinataX.get(index)*Adding.coordinataX.get(index)+Adding.coordinataY.get(index)*Adding.coordinataY.get(index))), 3/2);
     }
     static public double EnergyConst(double Vx, double Vy, double x, double y, int index){
@@ -47,11 +47,11 @@ public class Расчёты {
     //}
     static public double GetWX(double x, double y, int index){ //горизонтальное ускорение
 
-        return ForceX(index)/Adding.Mass.get(index);
+        return ForceX(x, y, index)/Adding.Mass.get(index);
     }
     static public double GetWY(double x, double y, int index){ //вертикальное ускорение
 
-        return ForceY(index)/Adding.Mass.get(index);
+        return ForceY(x, y, index)/Adding.Mass.get(index);
     }
     static public double GetVY(double x, double y, int index, double dt) { //горизонтальная скорость
         return GetWY(x, y, index)*dt;
