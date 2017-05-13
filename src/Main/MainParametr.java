@@ -21,7 +21,7 @@ public class MainParametr {
     public static double getA( int index){
         double r = (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2);
         double c = r * Math.sqrt(Adding.Vx.get(index)*Adding.Vx.get(index)+Adding.Vy.get(index)*Adding.Vy.get(index));
-        double p =c*c/(G*MassSun);
+        double p =c*c/(G*(MassSun +Adding.Mass.get(index)));
 
         if((p/(1 - Adding.E.get(index)*Adding.E.get(index))) > 30000){
             return Adding.A.get(index-1)+100;
@@ -46,18 +46,20 @@ public class MainParametr {
     }
 
     public static double GetAxVx(int index){
-        double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
+        double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index)-EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
         double Ax, Vx;
-        Ax =  - G * MassSun * Adding.coordinataX.get(index) / (r*r*r);
-        Vx = Ax * 0.01;
+        double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
+        Ax =  G * MassSun*Math.cos(theta + Math.PI) / (r*r);
+        Vx = Ax * 0.1;
         Adding.Vx.add(index, Vx);
-       return   Ax;
+        return   Ax;
     }
     public static double GetAyVy(int index){
-        double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index) - EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
+        double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index)-EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
         double Ay, Vy;
-        Ay =  - G * MassSun * Adding.coordinataY.get(index) / (r*r*r);
-        Vy = Ay * 0.01;
+        double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
+        Ay = G * MassSun *Math.sin(theta + Math.PI) / (r*r);
+        Vy = Ay * 0.1;
         Adding.Vy.add(index, Vy);
         return  Ay;
     }

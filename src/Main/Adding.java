@@ -8,11 +8,8 @@ import java.util.ArrayList;
 
 public class Adding extends JComponent implements ActionListener {
     private Расчёты calc = new Расчёты();
-    private Frame frame = new Frame();
-    private EarthMoving options = new EarthMoving();
     public static ArrayList<Long> Mass = new ArrayList<Long>();//массив для массы
-    public static ArrayList<Double> RadiusList = new ArrayList<Double>();//массив для радиусов
-    public static ArrayList<Double> TimerList = new ArrayList<Double>();//массив для коэффициентов
+       public static ArrayList<Double> TimerList = new ArrayList<Double>();//массив для коэффициентов
     public static ArrayList<Byte> numberOfMoons = new ArrayList<Byte>();
     public  static ArrayList<Double> coordinataX = new ArrayList<Double>();
     public  static ArrayList<Double> coordinataY = new ArrayList<Double>();
@@ -22,9 +19,8 @@ public class Adding extends JComponent implements ActionListener {
     public  static ArrayList<Double> Ay = new ArrayList<Double>();
     public  static ArrayList<Double> A = new ArrayList<Double>();
     public  static ArrayList<Double> B = new ArrayList<Double>();
-    public  static ArrayList<Double> H = new ArrayList<Double>();
-    public  static ArrayList<Double> K = new ArrayList<Double>();
     public  static ArrayList<Double> E = new ArrayList<Double>();
+    public  static ArrayList<Double> W = new ArrayList<Double>();
      private double k;
     public final static byte maxNumOfMoons = 4;
     public byte numOfMoons;

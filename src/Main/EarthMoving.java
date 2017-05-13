@@ -10,15 +10,14 @@ class EarthMoving extends Planets{
     public double angle2 = -0.01;
 
     private Timer timer;
-    static int width = 800;
+    static int width = 1100;
     static int height = 700;
 
     public EarthMoving() { //это основной счетсчик
-        timer = new Timer(20, new ActionListener() {
+        timer = new Timer(10, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 angle1 += 0.1;
                 angle2 += 0.1;
-                SettingsFrame.textField5.setText(String.format("%(.2f", angle1));
                 repaint();
             }
         });
@@ -34,17 +33,14 @@ class EarthMoving extends Planets{
     @Override
     protected void paintComponent(Graphics g) {
         Расчёты calc = new Расчёты();//создаем переменную класса Расчёты
-
         Image im = null;
-
         im = BackGround;
-
         g.fillRect(0, 0, width, height); //создает квадрат нужной величины(google в помощь)
         g.drawImage(im, 0, 0, null);//кидаем фон
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(0.5f));
         Adding adding = new Adding();
-        adding.addingPlanet(g2d,angle1/3,angle2,earthSmall);
+        adding.addingPlanet(g2d,angle1,angle2,earthSmall);
         calc.Sun(width, height,g2d);//смотреть в расчетах
     }
     public void actionPerformed(ActionEvent e) {}//прост

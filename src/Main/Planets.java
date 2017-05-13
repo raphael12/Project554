@@ -21,7 +21,7 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
     private static File earthSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthsmall.png");
     private static File earthNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthNormal.png");
     private  static File earthBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthBig.png");
-    private  static File BackGroundUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
+    private  static File BackGroundUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky2.GIF");
     private static File MoonUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
     private static File RedGiandUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\RedGiand.png");
     private  static File Sun128Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");
@@ -29,10 +29,8 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
     private  static File Sun64Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun64.png");
     private  static File Sun32Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun32.png");
     private  static File Sun16Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun16.png");
-    private final byte maxNumOfMoons = 4;
-    public byte numOfMoons;
-    Graphics2D g2d;
-    private Timer timer;
+
+
 
     public static void AddingImage(){
         try {
@@ -58,26 +56,5 @@ public abstract class Planets extends JComponent implements ActionListener{//э�
         }
     }
 
-    public void start() {
-        timer.start();
-    }//запускает счетсчик
-
-    public void stop() {
-        timer.stop();}//останавливает таймер
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        Расчёты calc = new Расчёты();//создаем переменную класса Расчёты
-        Image im = null;
-        im = BackGround;
-        g.fillRect(0, 0, width, height); //создает квадрат нужной величины(google в помощь)
-        g.drawImage(im, 0, 0, null);//кидаем фон
-        if (pulsing1 != false) {
-        } else {
-          //  calc.движение(width, height, new Double(SettingsFrame.textField2.getText()), angle / 3, g2d, earthSmall, numOfMoons);//color нужен только для орбиты, нужно от него избатиься
-        }
-        g2d=(Graphics2D) g;
-        g2d.setStroke(new BasicStroke(0.2f));//толщина круга, но как работает хз
-    }
 
 }
