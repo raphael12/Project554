@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainParametr {
-//    final static public double G = 6.67408 * Math.pow(10, -11);
+    //    final static public double G = 6.67408 * Math.pow(10, -11);
 //    final static public double MassSun = 1.989 * Math.pow(10, 13);
     final static public double MassSun = 5000;
     final static public double G = 1;
@@ -51,7 +51,6 @@ public class MainParametr {
         double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
         Ax =  G * MassSun*Math.cos(theta + Math.PI) / (r*r);
         Vx = Ax * 0.1;
-        Adding.Vx.add(index, Vx);
         return   Ax;
     }
     public static double GetAyVy(int index){
@@ -60,7 +59,6 @@ public class MainParametr {
         double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
         Ay = G * MassSun *Math.sin(theta + Math.PI) / (r*r);
         Vy = Ay * 0.1;
-        Adding.Vy.add(index, Vy);
         return  Ay;
     }
     public static double getH(double v, double k, double r){
