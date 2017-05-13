@@ -55,12 +55,12 @@ public class SettingsFrame extends JFrame {
         panel2.setSize(400,20);
         panel3.setSize(400,20);
 
-       textArea.setText("Показать/скрыть спутники ");
-       textArea2.setText("Показать/скрыть траекторию");
-       textArea3.setText("Размер планет");
-       panel9.add(textArea);
-       panel10.add(textArea2);
-       panel12.add(textArea3);
+        textArea.setText("Показать/скрыть спутники ");
+        textArea2.setText("Показать/скрыть траекторию");
+        textArea3.setText("Размер планет");
+        panel9.add(textArea);
+        panel10.add(textArea2);
+        panel12.add(textArea3);
         panel1.setSize(400, 100);
         panel2.setSize(400, 100);
         panel3.setSize(400, 100);
@@ -106,13 +106,15 @@ public class SettingsFrame extends JFrame {
         textField3.setText(String.valueOf(EarthMoving.height / 2));
         FinalPanel.setSize(new Dimension(200, 400));
         button3.addActionListener(new ActionListener() {
-            double x, y;
+            double x, y, Vx, Vy;
             private boolean pulsing = true;
 
             public void actionPerformed(ActionEvent e) {//добавляем ма
                 if (pulsing) {
                     x = Math.random() * EarthMoving.width ;
                     y = Math.random() * EarthMoving.height ;
+                    Vx = 2*Math.random();
+                    Vy = 3*Math.random();
 //                    if (Math.abs(x - EarthMoving.width / 2) < 60) {
 //                        Adding.coordinataX.add(x + 100);
 //                    } else if (Math.abs(x - EarthMoving.width / 2) > 300) {
@@ -132,6 +134,8 @@ public class SettingsFrame extends JFrame {
                     Adding.Mass.add(new Long(textField2.getText())); //массу добаляем
                     Adding.Ax.add(MainParametr.GetAxVx(i));
                     Adding.Ay.add(MainParametr.GetAyVy(i));
+                    Adding.Vx.add(Vx);
+                    Adding.Vy.add(Vy);
 //                    double ext = Math.random();
 //                    if (ext < 0.5) {
 //                        Adding.E.add(ext + 0.4);
@@ -298,7 +302,7 @@ public class SettingsFrame extends JFrame {
         FinalPanel.add(panel3);
         FinalPanel.add(panel4);
         FinalPanel.add(panel6);
-       //FinalPanel.add(panel7);
+        //FinalPanel.add(panel7);
         FinalPanel.add(panel8);
     }
 }
