@@ -21,7 +21,7 @@ public abstract class Planets extends JComponent implements ActionListener{//—ç—
     private static File earthSmallUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthsmall.png");
     private static File earthNormalUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthNormal.png");
     private  static File earthBigUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\earthBig.png");
-    private  static File BackGroundUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky2.GIF");
+    private  static File BackGroundUrl = new File(curDir.replace("\\", "\\\\") +"\\src\\Main\\res\\sky.GIF");
     private static File MoonUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\moon.png");
     private static File RedGiandUrl = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\RedGiand.png");
     private  static File Sun128Url = new File(curDir.replace("\\", "\\\\") + "\\src\\Main\\res\\sun.png");

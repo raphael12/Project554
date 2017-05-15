@@ -4,9 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SettingsFrame extends JFrame {
+    static int i = 0;
     static public double indicatorSize = 1;
-    static public JFrame settingsFrame = new JFrame("Settings");
-    public static Integer i = 0;
     static JButton button2 = new JButton();
     static JButton button3 = new JButton();
     static JButton button4 = new JButton();
@@ -113,8 +112,8 @@ public class SettingsFrame extends JFrame {
                 if (pulsing) {
                     x = Math.random() * EarthMoving.width ;
                     y = Math.random() * EarthMoving.height ;
-                    Vx = 2*Math.random();
-                    Vy = 3*Math.random();
+                    Vx = 10*Math.random();
+                    Vy = 10*Math.random();
 //                    if (Math.abs(x - EarthMoving.width / 2) < 60) {
 //                        Adding.coordinataX.add(x + 100);
 //                    } else if (Math.abs(x - EarthMoving.width / 2) > 300) {
@@ -189,7 +188,7 @@ public class SettingsFrame extends JFrame {
 
 //                    Adding.W.add(i, (double) 0);
 //                 Adding.E.add(MainParametr.getExentrisitet(r,Adding.K.get(i), Adding.H.get(i)));
-                    System.out.println( "Ax: " + Adding.Ax.get(i) + "  Ay: " + Adding.Ay.get(i) + "  X: " + Adding.coordinataX.get(i) + "  Y: " + Adding.coordinataY.get(i) + "  Mass: " + Adding.Mass.get(i));
+                    System.out.println( "Ax: " + Adding.Ax.get(i) + "  Ay: " + Adding.Ay.get(i) + " Vx: " + Adding.Vx.get(i) + " Vy: " + Adding.Vy.get(i) + "  X: " + Adding.coordinataX.get(i) + "  Y: " + Adding.coordinataY.get(i) + "  Mass: " + Adding.Mass.get(i));
                     i += 1;
                 } else {
                 }

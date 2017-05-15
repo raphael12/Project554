@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 public class MainParametr {
     //    final static public double G = 6.67408 * Math.pow(10, -11);
 //    final static public double MassSun = 1.989 * Math.pow(10, 13);
-    final static public double MassSun = 5000;
-    final static public double G = 1;
+    final static public double MassSun = 5000000;
+    final static public double G = 10;
     public static double getTheta(double yPos, double xPos) {
         double theta = Math.atan(yPos/xPos);
         if (xPos < 0)
@@ -47,18 +47,16 @@ public class MainParametr {
 
     public static double GetAxVx(int index){
         double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index)-EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
-        double Ax, Vx;
+        double Ax;
         double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
         Ax =  G * MassSun*Math.cos(theta + Math.PI) / (r*r);
-        Vx = Ax * 0.1;
         return   Ax;
     }
     public static double GetAyVy(int index){
         double r = Math.sqrt( (Adding.coordinataX.get(index)-EarthMoving.width/2) * (Adding.coordinataX.get(index)-EarthMoving.width/2) + (Adding.coordinataY.get(index)-EarthMoving.height/2) * (Adding.coordinataY.get(index)-EarthMoving.height/2));
-        double Ay, Vy;
+        double Ay;
         double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
         Ay = G * MassSun *Math.sin(theta + Math.PI) / (r*r);
-        Vy = Ay * 0.1;
         return  Ay;
     }
     public static double getH(double v, double k, double r){

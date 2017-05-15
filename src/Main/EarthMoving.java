@@ -7,14 +7,14 @@ import java.awt.event.ActionListener;
 class EarthMoving extends Planets{
 
     public double angle1 = 0;
-    public double angle2 = -0.01;
+    public double angle2 = -0.1;
 
     private Timer timer;
     static int width = 1100;
     static int height = 700;
 
     public EarthMoving() { //это основной счетсчик
-        timer = new Timer(10, new ActionListener() {
+        timer = new Timer(0, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 angle1 += 0.1;
                 angle2 += 0.1;
