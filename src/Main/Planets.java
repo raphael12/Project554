@@ -5,7 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
+import java.awt.MouseInfo;
+import java.awt.Point;
 public abstract class Planets extends JComponent implements ActionListener{//это скорее всего не понадобится
     static public boolean pulsing1 = true;
     static int width, height;

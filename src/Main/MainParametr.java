@@ -2,10 +2,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainParametr {
-    //    final static public double G = 6.67408 * Math.pow(10, -11);
-//    final static public double MassSun = 1.989 * Math.pow(10, 13);
     final static public double MassSun = 5000000;
     final static public double G = 10;
+
     public static double getTheta(double yPos, double xPos) {
         double theta = Math.atan(yPos/xPos);
         if (xPos < 0)
@@ -62,7 +61,5 @@ public class MainParametr {
     public static double getH(double v, double k, double r){
         return v*v-2*k/r;
     }
-//    public static double getExentrisitet(double r, double k, double h){
-//        return Math.sqrt(1+h/(k*k));
-//    }
+
 }

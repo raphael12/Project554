@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.awt.MouseInfo;
+import java.awt.Point;
 
 public class SettingsFrame extends JFrame {
     static int i = 0;
@@ -44,6 +45,7 @@ public class SettingsFrame extends JFrame {
     static JRadioButton Normal = new JRadioButton("Normal", true);
     static JRadioButton Big = new JRadioButton("Big", false);
 
+
     public static void SettingsFrame() {
         panel1.setSize(400,100);
         panel9.setSize(400,20);
@@ -53,7 +55,6 @@ public class SettingsFrame extends JFrame {
         panel13.setSize(400, 20);
         panel2.setSize(400,20);
         panel3.setSize(400,20);
-
         textArea.setText("Показать/скрыть спутники ");
         textArea2.setText("Показать/скрыть траекторию");
         textArea3.setText("Размер планет");
@@ -96,7 +97,7 @@ public class SettingsFrame extends JFrame {
 
         panel8.add(button9);
         button2.setText("Remove");
-        button3.setText("Add M ");
+        button3.setText("");
         button4.setText("X");
         button5.setText("Y");
         button7.setText("ZoomIn");
@@ -104,96 +105,6 @@ public class SettingsFrame extends JFrame {
         textField1.setText(String.valueOf(EarthMoving.width / 2));
         textField3.setText(String.valueOf(EarthMoving.height / 2));
         FinalPanel.setSize(new Dimension(200, 400));
-        button3.addActionListener(new ActionListener() {
-            double x, y, Vx, Vy;
-            private boolean pulsing = true;
-
-            public void actionPerformed(ActionEvent e) {//добавляем ма
-                if (pulsing) {
-                    x = Math.random() * EarthMoving.width ;
-                    y = Math.random() * EarthMoving.height ;
-                    Vx = 10*Math.random();
-                    Vy = 10*Math.random();
-//                    if (Math.abs(x - EarthMoving.width / 2) < 60) {
-//                        Adding.coordinataX.add(x + 100);
-//                    } else if (Math.abs(x - EarthMoving.width / 2) > 300) {
-//                        Adding.coordinataX.add(x - 200);
-//                    } else {
-//
-//                    }
-//                    if (Math.abs(y - EarthMoving.width / 2) < 60) {
-//                        Adding.coordinataY.add(y + 100);
-//                    } else if (Math.abs(y - E Adding.coordinataX.add(x);arthMoving.width / 2) > 300) {
-//                        Adding.coordinataY.add(y - 200);
-//                    } else {
-//                        Adding.coordinataY.add(y);
-//                    }
-                    Adding.coordinataX.add(x);
-                    Adding.coordinataY.add(y);
-                    Adding.Mass.add(new Long(textField2.getText())); //массу добаляем
-                    Adding.Ax.add(MainParametr.GetAxVx(i));
-                    Adding.Ay.add(MainParametr.GetAyVy(i));
-                    Adding.Vx.add(Vx);
-                    Adding.Vy.add(Vy);
-//                    double ext = Math.random();
-//                    if (ext < 0.5) {
-//                        Adding.E.add(ext + 0.4);
-//                    } else {
-//                        Adding.E.add(ext);
-//                    }
-                    Adding.numberOfMoons.add((byte) (Math.random() * Adding.maxNumOfMoons));
-                    textField2.setText("");
-                    pulsing = true;
-//                    Adding.K.add(MainParametr.getK(Adding.Mass.get(SettingsFrame.i)));
-//                    Adding.H.add(MainParametr.getH(Math.sqrt(Adding.Vx.get(i)*Adding.Vx.get(i)+Adding.Vy.get(i)*Adding.Vy.get(i)), Adding.K.get(i), Adding.RadiusList.get(i)));
-//                    double A = MainParametr.getA(i);
-//                    double B = MainParametr.getB(i);
-//                    if(A <= 0.04 && B <= 0.04){
-//                        Adding.A.add(100*A);
-//                        Adding.B.add(100*B);
-//                    } else if(A<=0.6 && B<=0.6) {
-//                        Adding.A.add(10*A);
-//                        Adding.B.add(10*B);
-//                    } else if(A < 10 && B < 10) {
-//                        Adding.A.add(2*A);
-//                        Adding.B.add(2*B);
-//                    } else {
-//                        Adding.A.add(A);
-//                        Adding.B.add(B);
-//                    }
-//                    if (A > 10) {
-//                        Adding.A.add(A - 5);
-//                    } else if (A < 1) {
-//                        Adding.A.add(A + 2);
-//                    } else {
-//                        Adding.A.add(A);
-//                    }
-
-//                    if (B > 10) {
-//                        if (A > B - 4) {
-//                            Adding.B.add(B - 4);
-//                        } else {
-//                            Adding.B.add(B);
-//                        }
-//
-//                    } else if (B < 0.8) {
-//                        if (A > B + 2) {
-//                            Adding.B.add(B + 2);
-//                        } else {
-//                            Adding.B.add(B);
-//                        }
-//                    } else {
-//                        Adding.B.add(B);
-//                    }
-
-//                    Adding.W.add(i, (double) 0);
-//                 Adding.E.add(MainParametr.getExentrisitet(r,Adding.K.get(i), Adding.H.get(i)));
-                    System.out.println( "Ax: " + Adding.Ax.get(i) + "  Ay: " + Adding.Ay.get(i) + " Vx: " + Adding.Vx.get(i) + " Vy: " + Adding.Vy.get(i) + "  X: " + Adding.coordinataX.get(i) + "  Y: " + Adding.coordinataY.get(i) + "  Mass: " + Adding.Mass.get(i));
-                    i += 1;
-                } else {
-                }
-            }
-        });
         button4.addActionListener(new ActionListener() {//координаты центра
             private boolean pulsing = true;
 
@@ -226,10 +137,6 @@ public class SettingsFrame extends JFrame {
                         Adding.numberOfMoons.remove(i - 1);
                         Adding.coordinataX.remove(i - 1);
                         Adding.coordinataY.remove(i - 1);
-//                        Adding.A.remove(i - 1);
-//                        Adding.B.remove(i - 1);
-//                        Adding.E.remove(i - 1);
-//                        Adding.W.remove(i - 1);
                         Adding.Ax.remove(i - 1);
                         Adding.Ay.remove(i - 1);
                         Adding.Vx.remove(i - 1);
@@ -273,6 +180,8 @@ public class SettingsFrame extends JFrame {
                 }
             }
         });
+
+
         textField7.setText(String.valueOf(Расчёты.MassSun));
         button9.addActionListener(new ActionListener() {
             private boolean pulsing = true;
@@ -301,7 +210,7 @@ public class SettingsFrame extends JFrame {
         FinalPanel.add(panel3);
         FinalPanel.add(panel4);
         FinalPanel.add(panel6);
-        //FinalPanel.add(panel7);
+        FinalPanel.add(panel7);
         FinalPanel.add(panel8);
     }
 }
