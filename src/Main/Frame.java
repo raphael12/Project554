@@ -14,13 +14,14 @@ public class Frame {
         public void mouseClicked(MouseEvent e) {
             double x = e.getPoint().x;
             double y = e.getPoint().y;
-            double Vx = 10 * Math.random();
-            double Vy = 10 * Math.random();
             String vvod = JOptionPane.showInputDialog("Введите массу");
             Adding.Mass.add(new Long(vvod));
+
             Adding.numberOfMoons.add((byte) (Math.random() * Adding.maxNumOfMoons));
             SettingsFrame.textField2.setText("");
             if (Adding.Mass.get(SettingsFrame.i) != 0){
+                double Vx = Math.sqrt(2*Расчёты.G*Adding.Mass.get(SettingsFrame.i)*x/Math.sqrt((x-EarthMoving.width/2)*(x-EarthMoving.width/2) + (y-EarthMoving.height/2)*(y-EarthMoving.height/2)));
+                double Vy = Math.sqrt(2*Расчёты.G*Adding.Mass.get(SettingsFrame.i)*y/Math.sqrt((x-EarthMoving.width/2)*(x-EarthMoving.width/2) + (y-EarthMoving.height/2)*(y-EarthMoving.height/2)));
                 Adding.coordinataX.add(x);
                 Adding.coordinataY.add(y);
                 Adding.Ax.add(MainParametr.GetAxVx(SettingsFrame.i));

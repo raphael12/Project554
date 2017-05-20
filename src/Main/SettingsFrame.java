@@ -16,6 +16,9 @@ public class SettingsFrame extends JFrame {
     static JButton button9 = new JButton();
     static JCheckBox checkBox1 = new JCheckBox();
     static JCheckBox checkBox2 = new JCheckBox();
+    static JCheckBox checkBox3 = new JCheckBox();
+    static JCheckBox checkBox4 = new JCheckBox();
+    static JCheckBox checkBox5 = new JCheckBox();
     static JTextField textField1 = new JTextField();
     static JTextField textField2 = new JTextField();
     static JTextField textField3 = new JTextField();
@@ -64,8 +67,9 @@ public class SettingsFrame extends JFrame {
         panel1.setSize(400, 100);
         panel2.setSize(400, 100);
         panel3.setSize(400, 100);
-        panel2.add(checkBox1);
-        panel11.add(checkBox2);
+//        panel2.add(checkBox1);
+//        panel2.add(checkBox2);
+//        panel2.add(checkBox3);
         panel6.add(button7);
         panel6.add(button8);
         //textArea.setPreferredSize(new Dimension(200, 20));
@@ -87,12 +91,15 @@ public class SettingsFrame extends JFrame {
         panel3.add(button4);
         panel3.add(textField3);
         panel3.add(button5);
-        panel1.add(SettingsFrame.textField2);
-        panel1.add(SettingsFrame.button3);
-        panel1.add(SettingsFrame.textField4);
+//        panel1.add(SettingsFrame.textField2);
+//        panel1.add(SettingsFrame.button3);
+//        panel1.add(SettingsFrame.textField4);
         panel1.add(SettingsFrame.button2);
-        panel7.add(textField5);
-        panel7.add(textField6);
+        panel7.add(checkBox1);
+        panel7.add(checkBox2);
+        panel7.add(checkBox3);
+        panel7.add(checkBox4);
+        panel7.add(checkBox5);
         panel8.add(textField7);
 
         panel8.add(button9);

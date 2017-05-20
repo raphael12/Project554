@@ -40,6 +40,7 @@ class EarthMoving extends Planets{
         g.drawImage(im, 0, 0, null);//кидаем фон
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(0.5f));
+        g2d.setColor(Color.RED);
         Adding adding = new Adding();
         adding.addingPlanet(g2d,angle1,angle2,earthSmall);
         calc.Sun(width, height,g2d);//смотреть в расчетах

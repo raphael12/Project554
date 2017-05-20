@@ -49,6 +49,7 @@ public class MainParametr {
         double Ax;
         double theta = Расчёты.getTheta(Adding.coordinataX.get(index), Adding.coordinataY.get(index));
         Ax =  G * MassSun*Math.cos(theta + Math.PI) / (r*r);
+
         return   Ax;
     }
     public static double GetAyVy(int index){

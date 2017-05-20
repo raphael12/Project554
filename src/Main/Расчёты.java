@@ -34,6 +34,7 @@ public class Расчёты {
     static public double Force(int index, double r) {
         return G * (MassSun * Adding.Mass.get(index)) / (r * r);
     }
+
     static public double getTheta(double yPos, double xPos) {//будут передаваться в точке отсчета Солнца
         double theta = Math.atan(yPos / xPos);
         if (xPos < 0)
@@ -72,9 +73,9 @@ public class Расчёты {
         if (SettingsFrame.checkBox1.isSelected()) {
             for (a = 0; a < numOfMoons; a++) {
                 if (r * Adding.TimerList.get(a) < r) {
-                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a) * 2, g2d, angle1 * Adding.TimerList.get(a));
+                    ДвижениеСпутника(x, y, widthIm * Adding.TimerList.get(a) * 2, g2d, angle1 * Adding.TimerList.get(a));
                 } else {
-                    ДвижениеСпутника(x, y, r * Adding.TimerList.get(a), g2d, angle1 * Adding.TimerList.get(a));
+                    ДвижениеСпутника(x, y, widthIm * Adding.TimerList.get(a), g2d, angle1 * Adding.TimerList.get(a));
                 }
             }
         }
@@ -98,15 +99,41 @@ public class Расчёты {
         Adding.coordinataY.remove(index);
         Adding.coordinataX.add(index, x);
         Adding.coordinataY.add(index, y);
+        String K = Integer.toString((int) getKE(index));
+        String P = Integer.toString((int) getPE(index));
+        if(SettingsFrame.checkBox4.isSelected()) {
+            g2d.setColor(Color.WHITE);
+            g2d.drawString("K = " + K, (int) x + 20, (int) y);
+            g2d.drawString("P = " + P, (int) x + 20, (int) y + 15);
+            g2d.setColor(Color.RED);
+        }
+        int vectoAx = ((int) (x+ Ax));
+        int vectoAy = ((int) (y+ Ay));
+        if(SettingsFrame.checkBox5.isSelected()) {
+            g2d.setStroke(new BasicStroke(4.0f));
+            double l = 10;
+            double alfa = 30;
+            double betta = getTheta(Math.abs(y-vectoAy-y), Math.abs(x-vectoAx - x));
+            g2d.drawLine((int) x, (int) y, vectoAx, vectoAy);
+            g2d.drawLine(vectoAx, vectoAy, vectoAx, vectoAy );
+            g2d.setStroke(new BasicStroke(0.3f));
+        }
         if (SettingsFrame.i != 0) {
             for (int i = 0; i < SettingsFrame.i; i++) {
                     if(i != index) {
-                        double Axcor = Adding.Ax.get(index) + G * Adding.Mass.get(i) / DistHost(index, i);
-                        double Aycor = Adding.Ay.get(index) + G * Adding.Mass.get(i) / DistHost(index, i);
+                        double thetta = getTheta(( Math.abs(Adding.coordinataY.get(i) - Adding.coordinataY.get(index))), Math.abs(Adding.coordinataX.get(i) - Adding.coordinataX.get(index)));
+                        double Axcor = Adding.Ax.get(index) - G * Adding.Mass.get(i)*Math.cos(thetta + Math.PI) / DistHost(index, i);
+                        double Aycor = Adding.Ay.get(index) - G * Adding.Mass.get(i) *Math.sin(thetta + Math.PI)/ DistHost(index, i);
                         double Vxcor = Adding.Vx.get(index) + Axcor * dt;
                         double Vycor = Adding.Vy.get(index) + Aycor * dt;
                         double X = Adding.coordinataX.get(index) + Vxcor * dt + Axcor * dt * dt / 2;
                         double Y = Adding.coordinataY.get(index) + Vycor * dt + Aycor * dt * dt / 2;
+                        if(SettingsFrame.checkBox3.isSelected()){
+                            g2d.drawLine((Adding.coordinataX.get(index).intValue()), (Adding.coordinataY.get(index).intValue()), EarthMoving.width/2, EarthMoving.height/2);
+                        }
+                        if(SettingsFrame.checkBox2.isSelected()) {
+                             g2d.drawLine(Adding.coordinataX.get(i).intValue() , (Adding.coordinataY.get(i).intValue()), (Adding.coordinataX.get(index).intValue()), (Adding.coordinataY.get(index).intValue()));
+                        }
                         Adding.coordinataX.remove(index);
                         Adding.coordinataY.remove(index);
                         Adding.Ax.remove(index);
@@ -124,25 +151,44 @@ public class Расчёты {
             }
         }
 
-
+    /**
+     * The method getKE returns the kinetic energy of the planet in arbitrary
+     * units.
+     */
+    public double getKE(int index) {
+        return Adding.Mass.get(index)*(Adding.Vx.get(index)*Adding.Vx.get(index) + Adding.Vy.get(index)*Adding.Vy.get(index))/2;
+    }
+    /**
+     * The method getPE returns the potential energy of the planet in arbitrary
+     * units.
+     */
+    public double getPE(int index) {
+        return Adding.Mass.get(index)*Math.sqrt(Adding.Ax.get(index)*Adding.Ax.get(index) + Adding.Ay.get(index)*Adding.Ay.get(index))*DistHost(index,index);
+    }
 
     static public double DistHost(int i, int k) {
-        double res, X, Y;
-        X = Math.abs(Adding.coordinataX.get(i) - Adding.coordinataX.get(k));
-        Y = Math.abs(Adding.coordinataY.get(i) - Adding.coordinataY.get(k));
-        res = X * X + Y * Y;
-        return res;
+        if(i != k) {
+            double res, X, Y;
+            X = Math.abs(Adding.coordinataX.get(i) - Adding.coordinataX.get(k));
+            Y = Math.abs(Adding.coordinataY.get(i) - Adding.coordinataY.get(k));
+            res = X * X + Y * Y;
+            return res;
+        } else {
+            double res, X, Y;
+            X = Math.abs(Adding.coordinataX.get(i) - EarthMoving.width/2);
+            Y = Math.abs(Adding.coordinataY.get(i) - EarthMoving.height/2);
+            res = X * X + Y * Y;
+            return res;
+        }
     }
 
     public void ДвижениеСпутника(double x, double y, double r, Graphics2D g2d, double angle) {
-        r = Math.min(r/10, 50);
         Image im;
         im = EarthMoving.Moon;
         int widthIm = 0;
         int heightIm = 0;
         widthIm = im.getWidth(null);
         heightIm = im.getHeight(null);
-        g2d.setColor(Color.RED);
         if (SettingsFrame.checkBox1.isSelected()) {
             g2d.draw(circle(x, y, r, r));
         }
