@@ -29,6 +29,11 @@ public class SettingsFrame extends JFrame {
     static JTextArea textArea = new JTextArea();
     static JTextArea textArea2 = new JTextArea();
     static JTextArea textArea3 = new JTextArea();
+    static JTextArea textArea4 = new JTextArea();
+    static JTextArea textArea5 = new JTextArea();
+    static JTextArea textArea6 = new JTextArea();
+    static JTextArea textArea7 = new JTextArea();
+    static JTextArea textArea8 = new JTextArea();
     static JPanel panel1 = new JPanel();
     static JPanel panel2 = new JPanel();
     static JPanel panel3 = new JPanel();
@@ -41,6 +46,9 @@ public class SettingsFrame extends JFrame {
     static JPanel panel11 = new JPanel();
     static JPanel panel12 = new JPanel();
     static JPanel panel13 = new JPanel();
+    static JPanel panel14 = new JPanel();
+    static JPanel panel15 = new JPanel();
+    static JPanel panel16 = new JPanel();
     static JPanel FinalPanel = new JPanel();
     static JComboBox Size = new JComboBox();
     static ButtonGroup setSize = new ButtonGroup();
@@ -52,21 +60,40 @@ public class SettingsFrame extends JFrame {
     public static void SettingsFrame() {
         panel1.setSize(400,100);
         panel9.setSize(400,20);
+        panel14.setSize(400,20);
+        panel15.setSize(400,20);
         panel10.setSize(400, 20);
         panel11.setSize(400, 20);
         panel12.setSize(400, 20);
         panel13.setSize(400, 20);
         panel2.setSize(400,20);
+        panel16.setSize(400,20);
         panel3.setSize(400,20);
-        textArea.setText("Показать/скрыть спутники ");
-        textArea2.setText("Показать/скрыть траекторию");
-        textArea3.setText("Размер планет");
-        panel9.add(textArea);
+       
+        textArea.setText("Размер планет ");
+        textArea2.setText("Координата Солнца");
+        textArea3.setText("Увеличить/уменьшить");
+        button9.setText("Изменить массу Солнца");
+        textArea4.setText("Показать/скрыть спутники");
+        textArea5.setText("Линия планет");
+        textArea6.setText("Линия Солнца");
+        textArea7.setText("Показать данные");
+        textArea8.setText("Центр планеты");
+        
+       panel9.add(textArea);
+        panel7.add(textArea6);
         panel10.add(textArea2);
         panel12.add(textArea3);
+        panel13.add(textArea4);
+        panel15.add(textArea5);
+        panel14.add(textArea7);
+        panel16.add(textArea8);
+        panel7.setSize(400,10);
         panel1.setSize(400, 100);
         panel2.setSize(400, 100);
         panel3.setSize(400, 100);
+        panel6.setSize(400,20);
+        panel12.add(textArea3);
 //        panel2.add(checkBox1);
 //        panel2.add(checkBox2);
 //        panel2.add(checkBox3);
@@ -77,8 +104,8 @@ public class SettingsFrame extends JFrame {
         button3.setPreferredSize(new Dimension(110, 20));
         button4.setPreferredSize(new Dimension(80, 20));
         button5.setPreferredSize(new Dimension(80, 20));
-        button7.setPreferredSize(new Dimension(80, 20));
-        button8.setPreferredSize(new Dimension(80, 20));
+        button7.setPreferredSize(new Dimension(90, 40));
+        button8.setPreferredSize(new Dimension(90, 40));
         button9.setPreferredSize(new Dimension(80, 20));
         textField1.setPreferredSize(new Dimension(80, 20));
         textField2.setPreferredSize(new Dimension(80, 20));
@@ -95,12 +122,12 @@ public class SettingsFrame extends JFrame {
 //        panel1.add(SettingsFrame.button3);
 //        panel1.add(SettingsFrame.textField4);
         panel1.add(SettingsFrame.button2);
-        panel7.add(checkBox1);
-        panel7.add(checkBox2);
+        panel13.add(checkBox1);
+        panel15.add(checkBox2);
         panel7.add(checkBox3);
-        panel7.add(checkBox4);
-        panel7.add(checkBox5);
-        panel8.add(textField7);
+        panel14.add(checkBox4);
+        panel16.add(checkBox5);
+        panel11.add(textField7);
 
         panel8.add(button9);
         button2.setText("Remove");
@@ -211,13 +238,21 @@ public class SettingsFrame extends JFrame {
 
         panel3.setLayout(new GridLayout(2, 2, 10, 10));
         panel6.setLayout(new GridLayout(1, 2, 10, 10));
-        FinalPanel.setLayout(new GridLayout(12, 1));//разбивает основную панел на 12 стречек и 1 столбец
-        FinalPanel.add(panel1);
-        FinalPanel.add(panel2);
-        FinalPanel.add(panel3);
+        //FinalPanel.setLayout(new GridLayout(12, 1));//разбивает основную панел на 12 стречек и 1 столбец
         FinalPanel.add(panel4);
+        FinalPanel.add(panel1);
+        FinalPanel.add(panel9);
+        FinalPanel.add(panel2);
+        FinalPanel.add(panel10);
+        FinalPanel.add(panel3);
+        FinalPanel.add(panel12);
         FinalPanel.add(panel6);
+        FinalPanel.add(panel13);
+        FinalPanel.add(panel15);
         FinalPanel.add(panel7);
+        FinalPanel.add(panel14);
+        FinalPanel.add(panel16);
         FinalPanel.add(panel8);
+        FinalPanel.add(panel11);
     }
 }
